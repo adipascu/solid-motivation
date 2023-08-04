@@ -1,6 +1,6 @@
 import { createSignal, onCleanup } from "solid-js";
 import { getBirthDay } from "./storage";
-import { Temporal } from "@js-temporal/polyfill";
+import { Temporal } from "temporal-polyfill";
 const animationLoop = (cb: (time: DOMHighResTimeStamp) => void) => {
   let handle: number;
   const loop = (time: DOMHighResTimeStamp) => {
@@ -12,7 +12,7 @@ const animationLoop = (cb: (time: DOMHighResTimeStamp) => void) => {
 };
 
 const midnightInstant = (date: Temporal.PlainDate) => {
-  return date.toZonedDateTime(Temporal.Now.timeZoneId()).toInstant();
+  return date.toZonedDateTime(Temporal.Now.timeZone()).toInstant();
 };
 const calculateAge = (birthDay: Temporal.PlainDate) =>
   Temporal.Now.instant().since(midnightInstant(birthDay)).total({

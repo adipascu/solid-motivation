@@ -5,12 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@js-temporal/polyfill':
-    specifier: ^0.4.4
-    version: 0.4.4
   solid-js:
     specifier: ^1.7.9
     version: 1.7.9
+  temporal-polyfill:
+    specifier: ^0.1.1
+    version: 0.1.1
 
 devDependencies:
   solid-devtools:
@@ -593,14 +593,6 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /@js-temporal/polyfill@0.4.4:
-    resolution: {integrity: sha512-2X6bvghJ/JAoZO52lbgyAPFj8uCflhTo2g7nkFzEQdXd/D8rEeD4HtmTEpmtGCva260fcd66YNXBOYdnmHqSOg==}
-    engines: {node: '>=12'}
-    dependencies:
-      jsbi: 4.3.0
-      tslib: 2.6.1
-    dev: false
-
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -1164,10 +1156,6 @@ packages:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
     dev: true
 
-  /jsbi@4.3.0:
-    resolution: {integrity: sha512-SnZNcinB4RIcnEyZqFPdGPVgrg2AcnykiBy0sHVJQKHYeaLUvi3Exj+iaPpLnFVkDPZIV4U0yvgC9/R4uEAZ9g==}
-    dev: false
-
   /jsesc@2.5.2:
     resolution: {integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==}
     engines: {node: '>=4'}
@@ -1397,6 +1385,16 @@ packages:
       has-flag: 4.0.0
     dev: true
 
+  /temporal-polyfill@0.1.1:
+    resolution: {integrity: sha512-/5e4EVRA0wBI/bEhWLirSjwUg1lELhQyTXxw9zNbVhqjKvI9BLczs+3wtsoD9sn3HN2ImAMW5XJQwAiXgWT+GA==}
+    dependencies:
+      temporal-spec: 0.1.0
+    dev: false
+
+  /temporal-spec@0.1.0:
+    resolution: {integrity: sha512-sMNggMeS6trCgMQuudgFHhX1gtBK3e+AT1zGrMsFYG1wlqtRT5E9rcvm3I1iNlvHpJX/3DO6L4qtWAuEl/T04Q==}
+    dev: false
+
   /tiny-invariant@1.3.1:
     resolution: {integrity: sha512-AD5ih2NlSssTCwsMznbvwMZpJ1cbhkGd2uueNxzv2jDlEeZdU04JQfRnggJQ8DrcVBGjAsCKwFBbDlVNtEMlzw==}
     dev: true
@@ -1412,10 +1410,6 @@ packages:
     dependencies:
       is-number: 7.0.0
     dev: true
-
-  /tslib@2.6.1:
-    resolution: {integrity: sha512-t0hLfiEKfMUoqhG+U1oid7Pva4bbDPHYfJNiB7BiIjRkj1pyC++4N3huJfqY6aRH6VTB0rvtzQwjM4K6qpfOig==}
-    dev: false
 
   /type-fest@0.21.3:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}

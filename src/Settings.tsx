@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js";
 import { setBirthDay } from "./storage";
-import { Temporal } from "@js-temporal/polyfill";
+import { Temporal } from "temporal-polyfill";
 
 export default () => {
   const [date, setDate] = createSignal<Temporal.PlainDate | null>(null);
