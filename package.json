@@ -1,4 +1,11 @@
 {
   "packageManager": "pnpm@8.6.11",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "^4.4.8"
+  },
   "license": "MIT"
 }
