@@ -1,18 +1,15 @@
 import { createSignal } from "solid-js";
 import { setBirthDay } from "./storage";
+import { Temporal } from "@js-temporal/polyfill";
 
 export default () => {
-  const [date, setDate] = createSignal<Date | null>(null);
+  const [date, setDate] = createSignal<Temporal.PlainDate | null>(null);
   return (
     <div>
       <input
         type="date"
         onInput={(e) => {
-          const date = new Date(e.currentTarget.value);
-          if (isNaN(date.getTime())) {
-            return;
-          }
-          setDate(date);
+          setDate(Temporal.PlainDate.from(e.currentTarget.value));
         }}
       />
       <button

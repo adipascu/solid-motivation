@@ -1,16 +1,39 @@
-import { createSignal } from "solid-js";
+import { createSignal, onCleanup } from "solid-js";
+import { getBirthDay } from "./storage";
+import { Temporal } from "@js-temporal/polyfill";
+const animationLoop = (cb: (time: DOMHighResTimeStamp) => void) => {
+  let handle: number;
+  const loop = (time: DOMHighResTimeStamp) => {
+    cb(time);
+    handle = requestAnimationFrame(loop);
+  };
+  handle = requestAnimationFrame(loop);
+  return () => cancelAnimationFrame(handle);
+};
 
+const midnightInstant = (date: Temporal.PlainDate) => {
+  return date.toZonedDateTime(Temporal.Now.timeZoneId()).toInstant();
+};
+const calculateAge = (birthDay: Temporal.PlainDate) =>
+  Temporal.Now.instant().since(midnightInstant(birthDay)).total({
+    unit: "years",
+    relativeTo: birthDay,
+  });
 export default () => {
-  const [count, setCount] = createSignal(0);
+  const birthDay = getBirthDay();
+  if (birthDay === null) {
+    throw new Error("Birthday not set");
+  }
+  const [age, setAge] = createSignal<number>(calculateAge(birthDay));
 
-  setInterval(() => {
-    setCount(count() + 1);
-  }, 1000);
+  const handle = animationLoop(() => {
+    setAge(calculateAge(birthDay));
+  });
+  onCleanup(handle);
 
   return (
     <div>
-      <h1>{new Date("2023-08-04").toISOString()}</h1>
-      <p>Count: {count()}</p>
+      <p>age {age().toFixed(11)}</p>
     </div>
   );
 };

@@ -12,6 +12,7 @@
     "vite-plugin-solid": "^2.7.0"
   },
   "dependencies": {
+    "@js-temporal/polyfill": "^0.4.4",
     "solid-js": "^1.7.9"
   },
   "type": "module",

@@ -1,5 +1,6 @@
-const BIRTHDAY_KEY = 'birthday';
+import { Temporal } from '@js-temporal/polyfill';
 
+const BIRTHDAY_KEY = 'birthday';
 
 const parseNumber = (value: string) => {
   var number = Number(value);
@@ -15,15 +16,9 @@ export const getBirthDay = () => {
     return null;
   }
 
-  var dateParts = birthdayString.split('-');
-  const birthday = new Date();
-  birthday.setFullYear(parseNumber(dateParts[0]));
-  birthday.setMonth(parseNumber(dateParts[1]) - 1);
-  birthday.setDate(parseNumber(dateParts[2]));
-  birthday.setHours(0, 0, 0, 0);
-  return birthday;
+  return Temporal.PlainDate.from(birthdayString);
 }
 
-export const setBirthDay = (birthday: Date) => {
-  localStorage.setItem(BIRTHDAY_KEY, birthday.toISOString().split('T')[0]);
+export const setBirthDay = (birthday: Temporal.PlainDate) => {
+  localStorage.setItem(BIRTHDAY_KEY, birthday.toJSON());
 }
