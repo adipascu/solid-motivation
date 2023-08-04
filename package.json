@@ -5,9 +5,15 @@
     "build": "vite build"
   },
   "devDependencies": {
+    "solid-devtools": "^0.27.7",
     "typescript": "^5.1.6",
     "vite": "^4.4.8",
-    "vite-plugin-checker": "^0.6.1"
+    "vite-plugin-checker": "^0.6.1",
+    "vite-plugin-solid": "^2.7.0"
   },
+  "dependencies": {
+    "solid-js": "^1.7.9"
+  },
+  "type": "module",
   "license": "MIT"
 }
