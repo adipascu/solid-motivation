@@ -1,16 +1,13 @@
 import { createSignal } from "solid-js";
+import { getBirthDay } from "./storage";
+import Settings from "./Settings";
+import Countdown from "./Countdown";
 
 export default () => {
-  const [count, setCount] = createSignal(0);
+  const birthday = getBirthDay();
 
-  setInterval(() => {
-    setCount(count() + 1);
-  }, 1000);
-
-  return (
-    <div>
-      <h1>Hello World</h1>
-      <p>Count: {count()}</p>
-    </div>
-  );
+  if (!birthday) {
+    return <Settings />;
+  }
+  return <Countdown />;
 };
