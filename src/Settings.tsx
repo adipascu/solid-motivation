@@ -1,8 +1,11 @@
 import { createSignal } from "solid-js";
-import { setBirthDay } from "./storage";
 import { Temporal } from "temporal-polyfill";
 
-export default () => {
+export default ({
+  onBirthDay,
+}: {
+  onBirthDay: (birthDay: Temporal.PlainDate | null) => void;
+}) => {
   const [date, setDate] = createSignal<Temporal.PlainDate | null>(null);
   return (
     <div>
@@ -19,7 +22,7 @@ export default () => {
           if (!inputDate) {
             throw new Error("Birthday not set");
           }
-          setBirthDay(inputDate);
+          onBirthDay(inputDate);
         }}
       >
         Motivate

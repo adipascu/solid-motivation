@@ -19,11 +19,7 @@ const calculateAge = (birthDay: Temporal.PlainDate) =>
     unit: "years",
     relativeTo: birthDay,
   });
-export default () => {
-  const birthDay = getBirthDay();
-  if (birthDay === null) {
-    throw new Error("Birthday not set");
-  }
+export default ({ birthDay }: { birthDay: Temporal.PlainDate }) => {
   const [age, setAge] = createSignal<number>(calculateAge(birthDay));
 
   const handle = animationLoop(() => {
