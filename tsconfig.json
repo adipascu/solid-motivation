@@ -8,6 +8,5 @@
     "jsxImportSource": "solid-js",
     "isolatedModules": true,
     "skipLibCheck": true
-  },
-  "include": ["src/**/*"]
+  }
 }

@@ -1,0 +1,49 @@
+{
+  "plugins": [
+    "eslint-plugin-prettier",
+    "@typescript-eslint/eslint-plugin",
+    "simple-import-sort",
+    "no-type-assertion"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "extends": [
+    "eslint-config-airbnb-typescript",
+    "eslint-config-airbnb/base",
+    "eslint-config-prettier"
+  ],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "react/jsx-filename-extension":  "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "no-else-return": "error",
+    "curly": ["error", "all"],
+    "prettier/prettier": [
+      "warn",
+      {
+        "parser": "typescript"
+      }
+    ],
+    "no-type-assertion/no-type-assertion": "warn",
+    "import/no-unused-modules": ["error", { "unusedExports": true }],
+    "@typescript-eslint/no-unused-expressions": [
+      "error",
+      {
+        "allowShortCircuit": true,
+        "allowTernary": true,
+        "enforceForJSX": true
+      }
+    ]
+  }
+}
