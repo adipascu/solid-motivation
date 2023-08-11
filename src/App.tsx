@@ -12,11 +12,12 @@ export default () => {
   let initialRender = true;
 
   createEffect(() => {
+    const value = getValue();
     if (initialRender) {
       initialRender = false;
       return;
     }
-    setBirthDay(getValue());
+    setBirthDay(value);
   });
 
   onCleanup(() => {
