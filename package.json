@@ -7,8 +7,8 @@
     "start": "vite",
     "build": "vite build",
     "build:watch": "vite build --watch",
-    "lint": "eslint . --ext .js,.ts,.tsx",
-    "lint:fix": "eslint . --fix --ext .js,.ts,.tsx"
+    "lint": "eslint . --ext .js,.ts,.tsx --max-warnings=0",
+    "lint:fix": "eslint . --fix --ext .js,.ts,.tsx --max-warnings=0"
   },
   "devDependencies": {
     "eslint": "^8.46.0",
