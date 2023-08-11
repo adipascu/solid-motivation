@@ -14,4 +14,5 @@ export default {
     solidDevtoolsPlugin(),
     solidPlugin(),
   ],
+  base: "./",
 } satisfies UserConfig;
