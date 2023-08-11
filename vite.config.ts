@@ -1,14 +1,17 @@
-import { UserConfig } from 'vite';
-import checkerPlugin from 'vite-plugin-checker'
-import solidPlugin from 'vite-plugin-solid';
-import solidDevtoolsPlugin from 'solid-devtools/vite';
+/* eslint-disable import/no-extraneous-dependencies */
+import { UserConfig } from "vite";
+import checkerPlugin from "vite-plugin-checker";
+import solidPlugin from "vite-plugin-solid";
+// eslint-disable-next-line import/no-unresolved
+import solidDevtoolsPlugin from "solid-devtools/vite";
 
+// eslint-disable-next-line import/no-unused-modules
 export default {
   plugins: [
     checkerPlugin({
-      typescript: true
+      typescript: true,
     }),
     solidDevtoolsPlugin(),
     solidPlugin(),
   ],
-} satisfies UserConfig
+} satisfies UserConfig;

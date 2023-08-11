@@ -1,12 +1,12 @@
-import Settings from "./Settings";
-import Countdown from "./Countdown";
 import { Show, createEffect, createSignal, onCleanup } from "solid-js";
 import { Temporal } from "temporal-polyfill";
+import Settings from "./Settings";
+import Countdown from "./Countdown";
 import { getBirthDay, setBirthDay } from "./storage";
 
 export default () => {
   const [getValue, setValue] = createSignal<Temporal.PlainDate | null>(
-    getBirthDay()
+    getBirthDay(),
   );
 
   let initialRender = true;
@@ -34,9 +34,7 @@ export default () => {
         />
       }
     >
-    {
-      (birthDay) => <Countdown birthDay={birthDay()} />
-    }
+      {(birthDay) => <Countdown birthDay={birthDay()} />}
     </Show>
   );
 };
