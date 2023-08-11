@@ -1,5 +1,8 @@
 {
   "packageManager": "pnpm@8.6.11",
+  "engines": {
+    "node": "^20.5.1"
+  },
   "scripts": {
     "start": "vite",
     "build": "vite build",
