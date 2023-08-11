@@ -1,0 +1,11 @@
+runs:
+  using: "composite"
+  steps:
+    - run: corepack enable
+      shell: bash
+    - uses: actions/setup-node@v3
+      with:
+        node-version-file: "package.json"
+        cache: "pnpm"
+    - run: pnpm install --frozen-lockfile
+      shell: bash
