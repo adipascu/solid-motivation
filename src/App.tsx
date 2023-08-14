@@ -34,7 +34,14 @@ export default () => {
         />
       }
     >
-      {(birthDay) => <Countdown birthDay={birthDay()} />}
+      {(birthDay) => (
+        <Countdown
+          birthDay={birthDay()}
+          openSettings={() => {
+            setValue(null);
+          }}
+        />
+      )}
     </Show>
   );
 };

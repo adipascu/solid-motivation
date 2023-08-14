@@ -19,8 +19,15 @@ const calculateAge = (birthDay: Temporal.PlainDate) =>
     unit: "years",
     relativeTo: birthDay,
   });
-export default ({ birthDay }: { birthDay: Temporal.PlainDate }) => {
+export default ({
+  birthDay,
+  openSettings,
+}: {
+  birthDay: Temporal.PlainDate;
+  openSettings: () => void;
+}) => {
   const [age, setAge] = createSignal<number>(calculateAge(birthDay));
+  const [isHovered, setIsHovered] = createSignal(false);
 
   const handle = animationLoop(() => {
     setAge(calculateAge(birthDay));
@@ -34,12 +41,18 @@ export default ({ birthDay }: { birthDay: Temporal.PlainDate }) => {
     <div
       style={{
         display: "flex",
-        "flex-direction": "column",
         "justify-content": "center",
         "align-items": "center",
       }}
     >
-      <div>
+      <div
+        style={{
+          display: "flex",
+          "flex-direction": "column",
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <div
           style={{
             "font-family": FONT_FAMILY,
@@ -50,7 +63,17 @@ export default ({ birthDay }: { birthDay: Temporal.PlainDate }) => {
             "margin-left": "4px",
           }}
         >
-          Age
+          <span>Age</span>{" "}
+          <span
+            style={{
+              opacity: isHovered() ? 1 : 0,
+              transition: "opacity 0.2s ease-in-out",
+              cursor: "pointer",
+            }}
+            onClick={openSettings}
+          >
+            ⚙️
+          </span>
         </div>
         <div
           style={{
@@ -59,7 +82,8 @@ export default ({ birthDay }: { birthDay: Temporal.PlainDate }) => {
             "font-family": FONT_FAMILY,
             "font-size": "96px",
             "font-weight": "bold",
-            "line-height": "0.8",
+            "line-height": "0.85",
+            overflow: "hidden",
             color: "#494949",
           }}
         >
