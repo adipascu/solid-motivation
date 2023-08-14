@@ -10,7 +10,16 @@ export default ({
   return (
     <div>
       <input
+        autofocus
         type="date"
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            const inputDate = date();
+            if (inputDate) {
+              onBirthDay(inputDate);
+            }
+          }
+        }}
         onInput={(e) => {
           setDate(Temporal.PlainDate.from(e.currentTarget.value));
         }}
