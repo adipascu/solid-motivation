@@ -71,6 +71,7 @@ export default ({
               cursor: "pointer",
             }}
             onClick={openSettings}
+            title={`Birthday: ${birthDay.toLocaleString()}`}
           >
             ⚙️
           </span>
