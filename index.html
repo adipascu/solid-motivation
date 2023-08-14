@@ -1,12 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Motivation</title>
-</head>
-<body>
-  <div id="root"></div>
-  <script src="/src/main.tsx" type="module"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Motivation</title>
+    <style>
+      html,
+      body,
+      #app {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        display: flex;
+      }
+      #app > * {
+        min-height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="/src/main.tsx" type="module"></script>
+  </body>
 </html>

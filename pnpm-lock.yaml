@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@fontsource/sen':
+    specifier: ^5.0.8
+    version: 5.0.8
   solid-js:
     specifier: ^1.7.9
     version: 1.7.9
@@ -628,6 +631,10 @@ packages:
     resolution: {integrity: sha512-a8TLtmPi8xzPkCbp/OGFUo5yhRkHM2Ko9kOWP4znJr0WAhWyThaw3PnwX4vOTWOAMsV2uRt32PPDcEz63esSaA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@fontsource/sen@5.0.8:
+    resolution: {integrity: sha512-S0Ej0vMsoLJWmmKCRo+NjDzp+3jbKGHLfIUQ1K3wt55P9vuT3U7PWuW/nXm2sBJ0nFvBb/92D8QNaFuempcEDw==}
+    dev: false
 
   /@humanwhocodes/config-array@0.11.10:
     resolution: {integrity: sha512-KVVjQmNUepDVGXNuoRRdmmEjruj0KfiGSbS8LVc12LMsWDQzRXJ0qdhN8L8uUigKpfEHRhlaQFY0ib1tnUbNeQ==}

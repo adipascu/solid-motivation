@@ -2,10 +2,10 @@ import { render } from "solid-js/web";
 
 import App from "./App";
 
-const root = document.getElementById("root");
+const container = document.getElementById("app");
 
-if (!root) {
+if (!container) {
   throw new Error("Root element not found");
 }
 
-render(() => <App />, root);
+render(() => <App />, container);

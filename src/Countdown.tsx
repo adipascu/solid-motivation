@@ -1,5 +1,6 @@
 import { createSignal, onCleanup } from "solid-js";
 import { Temporal } from "temporal-polyfill";
+import FONT_FAMILY from "./font";
 
 const animationLoop = (cb: (time: DOMHighResTimeStamp) => void) => {
   let handle: number;
@@ -26,9 +27,54 @@ export default ({ birthDay }: { birthDay: Temporal.PlainDate }) => {
   });
   onCleanup(handle);
 
+  const largeAge = () => age().toFixed(11).split(".")[0];
+  const smallAge = () => `.${age().toFixed(11).split(".")[1]}`;
+
   return (
-    <div>
-      <p>age {age().toFixed(11)}</p>
+    <div
+      style={{
+        display: "flex",
+        "flex-direction": "column",
+        "justify-content": "center",
+        "align-items": "center",
+      }}
+    >
+      <div>
+        <div
+          style={{
+            "font-family": FONT_FAMILY,
+            "font-size": "19.2px",
+            "font-weight": "bold",
+            "text-transform": "uppercase",
+            color: "#B0B5B9",
+            "margin-left": "4px",
+          }}
+        >
+          Age
+        </div>
+        <div
+          style={{
+            display: "flex",
+            "flex-direction": "row",
+            "font-family": FONT_FAMILY,
+            "font-size": "96px",
+            "font-weight": "bold",
+            "line-height": "0.8",
+            color: "#494949",
+          }}
+        >
+          <div>{largeAge()}</div>
+          <div
+            style={{
+              "font-size": "38.4px",
+              "margin-top": "9px",
+              "margin-left": "7px",
+            }}
+          >
+            {smallAge()}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -25,6 +25,7 @@
     "vite-plugin-solid": "^2.7.0"
   },
   "dependencies": {
+    "@fontsource/sen": "^5.0.8",
     "solid-js": "^1.7.9",
     "temporal-polyfill": "^0.1.1"
   },
