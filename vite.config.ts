@@ -7,6 +7,9 @@ import solidDevtoolsPlugin from "solid-devtools/vite";
 
 // eslint-disable-next-line import/no-unused-modules
 export default {
+  build: {
+    target: "esnext",
+  },
   plugins: [
     checkerPlugin({
       typescript: true,

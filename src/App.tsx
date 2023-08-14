@@ -1,28 +1,29 @@
-import { Show, createEffect, createSignal, onCleanup } from "solid-js";
+import {
+  Show,
+  createEffect,
+  createResource,
+  createSignal,
+  onCleanup,
+} from "solid-js";
 import { Temporal } from "temporal-polyfill";
 import Settings from "./Settings";
 import Countdown from "./Countdown";
-import { getBirthDay, setBirthDay } from "./storage";
+import { BirthDay, getBirthDay, setBirthDay } from "./storage";
 
 export default () => {
-  const [getValue, setValue] = createSignal<Temporal.PlainDate | null>(
-    getBirthDay(),
+  const [getValue, { refetch }] = createResource<BirthDay, BirthDay>(
+    async (source, { refetching }) => {
+      if (typeof refetching !== "boolean") {
+        await setBirthDay(refetching);
+        return refetching;
+      }
+      return getBirthDay();
+    },
   );
 
-  let initialRender = true;
-
-  createEffect(() => {
-    const value = getValue();
-    if (initialRender) {
-      initialRender = false;
-      return;
-    }
-    setBirthDay(value);
-  });
-
-  onCleanup(() => {
-    initialRender = false;
-  });
+  const setValue = (newBirthDay: Temporal.PlainDate | null) => {
+    refetch(newBirthDay);
+  };
   return (
     <Show
       when={getValue()}

@@ -3,7 +3,8 @@
   "name": "Solid Motivation",
   "version": "1.0.0",
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
   "chrome_url_overrides": {
     "newtab": "index.html"
