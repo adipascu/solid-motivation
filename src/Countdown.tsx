@@ -27,8 +27,8 @@ export default ({ birthDay }: { birthDay: Temporal.PlainDate }) => {
   });
   onCleanup(handle);
 
-  const largeAge = () => age().toFixed(11).split(".")[0];
-  const smallAge = () => `.${age().toFixed(11).split(".")[1]}`;
+  const largeAge = () => Math.floor(age()).toString();
+  const smallAge = () => age().toFixed(11).split(".")[1];
 
   return (
     <div
@@ -75,7 +75,7 @@ export default ({ birthDay }: { birthDay: Temporal.PlainDate }) => {
               width: "280px",
             }}
           >
-            {smallAge()}
+            .{smallAge()}
           </div>
         </div>
       </div>
