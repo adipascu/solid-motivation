@@ -67,8 +67,12 @@ export default ({ birthDay }: { birthDay: Temporal.PlainDate }) => {
           <div
             style={{
               "font-size": "38.4px",
-              "margin-top": "9px",
+              "margin-top": "5px",
+              "line-height": "1",
               "margin-left": "7px",
+              overflow: "hidden",
+              "text-overflow": "ellipsis",
+              width: "280px",
             }}
           >
             {smallAge()}
