@@ -1,8 +1,12 @@
 import { Temporal } from "temporal-polyfill";
+import { Getter, Setter } from "./types";
 
-const { getValue, setValue } = await (window?.chrome?.storage
+const { getValue, setValue } = (await (window?.chrome?.storage
   ? import("./extension")
-  : import("./browser"));
+  : import("./browser"))) satisfies {
+  getValue: Getter;
+  setValue: Setter;
+};
 
 export type BirthDay = Temporal.PlainDate | null;
 
