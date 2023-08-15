@@ -1,14 +1,14 @@
 # Solid Motivation - Browser Extension
 
-Solid Motivation is a browser extension available for both Chrome and Firefox. It replaces your new tab page with an ever-increasing counter, showing your age in real-time. As a vivid reminder of time's relentless march, it seeks to inspire you to seize every moment. This extension is powered by Solid.JS and is deeply influenced by maccman's "Motivation" extension.
+Solid Motivation is a browser extension available for both Chrome and Firefox. It transforms your new tab page into a real-time counter displaying your age — in years, down to many decimal places. Every fraction of a second counts, emphasizing the urgency of time and inspiring you to live every moment to the fullest. This extension is powered by [Solid.JS](https://solidjs.com/) and is deeply influenced by [maccman's Motivation](https://github.com/maccman/motivation) extension.
 
 ![Screenshot of Solid Motivation](./docs/screenshot.svg)
 
 ## Features
 
-- Real-time display of your age, right down to the seconds.
-- Sleek, distraction-free design.
-- Engineered with the robust Solid.JS library.
+- Displays your age in real-time years, meticulously detailed down to numerous decimal places.
+- Elegant and distraction-free design, focusing solely on the essence of time.
+- Built harnessing the capabilities of [Solid.JS](https://solidjs.com/).
 
 ## Installation
 
@@ -16,7 +16,7 @@ Solid Motivation is a browser extension available for both Chrome and Firefox. I
 
 1. Clone the repository: `git clone https://github.com/adipascu/solid-motivation.git`
 2. Navigate to `chrome://extensions/` in Chrome.
-3. Enable Developer Mode by clicking on the toggle switch at the top right.
+3. Enable Developer Mode by toggling the switch at the top right.
 4. Click on the `Load unpacked` button and select the directory where you cloned the repository.
 
 ### Firefox
@@ -28,8 +28,8 @@ Solid Motivation is a browser extension available for both Chrome and Firefox. I
 
 ## Usage
 
-1. Post-installation, every new tab will showcase the Solid Motivation page with your real-time age.
-2. Adjust your birthdate by clicking the settings icon or other designated UI component.
+1. Once the extension is activated, each new tab will present the Solid Motivation page, precisely showcasing your age.
+2. To set your birthdate, access the settings icon or the relevant UI component.
 
 ## Credits
 
@@ -40,7 +40,7 @@ Solid Motivation is a browser extension available for both Chrome and Firefox. I
 
 Interested in making a contribution? Here's how:
 
-1. Fork the repository (`https://github.com/your-username/solid-motivation/fork`)
+1. Fork the repository (`https://github.com/adipascu/solid-motivation/fork`)
 2. Create a feature branch (`git checkout -b feature/fooBar`)
 3. Commit your modifications (`git commit -am 'Introduce fooBar'`)
 4. Push to your branch (`git push origin feature/fooBar`)
@@ -48,4 +48,4 @@ Interested in making a contribution? Here's how:
 
 ## License
 
-This project is covered under the MIT License. For more details, refer to the [LICENSE.md](LICENSE.md) file.
+This project is covered under the MIT License. For more details, refer to the [LICENSE](LICENSE) file.
