@@ -17,6 +17,12 @@
         min-height: 100%;
         width: 100%;
       }
+      /* dark mode set before JS loads to avoid white flash on page load */
+      @media (prefers-color-scheme: dark) {
+        html {
+          background-color: #181a1b;
+        }
+      }
     </style>
   </head>
   <body>
