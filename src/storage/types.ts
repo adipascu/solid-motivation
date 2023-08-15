@@ -1,4 +1,4 @@
 type Value = string | null;
 
-export type Getter = (key: string) => Promise<Value>;
-export type Setter = (key: string, value: Value) => Promise<void>;
+export type Getter = (observer: (value: Value) => void) => () => void;
+export type Setter = (value: Value) => Promise<void>;

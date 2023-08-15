@@ -11,7 +11,9 @@ const { getValue, setValue } = (await (window?.chrome?.storage
 export type BirthDay = Temporal.PlainDate | null;
 
 export const getBirthDay = async (): Promise<BirthDay> => {
-  const birthdayString = await getValue();
+  const birthdayString = await new Promise<string | null>((resolve) => {
+    getValue(resolve);
+  });
   if (birthdayString === null) {
     return null;
   }

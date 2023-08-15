@@ -1,14 +1,13 @@
+import type { Getter, Setter } from "./types";
+
 const BIRTHDAY_KEY = "birthday";
 
-export const getValue = async () => {
-  const birthdayString = localStorage.getItem(BIRTHDAY_KEY);
-  if (birthdayString === null) {
-    return null;
-  }
-  return birthdayString;
+export const getValue: Getter = (obs) => {
+  obs(localStorage.getItem(BIRTHDAY_KEY));
+  return () => {};
 };
 
-export const setValue = async (birthday: string | null) => {
+export const setValue: Setter = async (birthday: string | null) => {
   if (birthday === null) {
     localStorage.removeItem(BIRTHDAY_KEY);
   } else {
