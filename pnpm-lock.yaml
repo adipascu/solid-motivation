@@ -8,6 +8,9 @@ dependencies:
   '@fontsource/sen':
     specifier: ^5.0.8
     version: 5.0.8
+  solid-icons:
+    specifier: ^1.0.11
+    version: 1.0.11(solid-js@1.7.9)
   solid-js:
     specifier: ^1.7.9
     version: 1.7.9
@@ -3056,6 +3059,15 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /solid-icons@1.0.11(solid-js@1.7.9):
+    resolution: {integrity: sha512-shEL5Otrl73LPZukpanJKi6ISnQhpIvhqqAb8haKyCGrixHOYC6yGfNkSE7jpkKSikZ0rGtSMRiFETRrec2Uzw==}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      solid-js: '*'
+    dependencies:
+      solid-js: 1.7.9
+    dev: false
 
   /solid-js@1.7.9:
     resolution: {integrity: sha512-p1orXnauMQmwYULZtuPAXyKNRGEN2qh60kLX4YURa3jvulxAqjlh2kWEljXCtAVR6UZPC16NXdj9ASHcH383Fg==}

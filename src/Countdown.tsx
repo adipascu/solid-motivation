@@ -1,5 +1,6 @@
 import { createSignal, onCleanup } from "solid-js";
 import { Temporal } from "temporal-polyfill";
+import { IoSettingsSharp } from "solid-icons/io";
 import FONT_FAMILY from "./font";
 
 const animationLoop = (cb: (time: DOMHighResTimeStamp) => void) => {
@@ -37,6 +38,8 @@ export default ({
   const largeAge = () => Math.floor(age()).toString();
   const smallAge = () => age().toFixed(11).split(".")[1];
 
+  const COLOR_COUNTER = "#494949";
+  const COLOR_LABEL = "#B0B5B9";
   return (
     <div
       style={{
@@ -55,26 +58,29 @@ export default ({
       >
         <div
           style={{
+            display: "flex",
+            "flex-direction": "row",
             "font-family": FONT_FAMILY,
             "font-size": "19.2px",
             "font-weight": "bold",
             "text-transform": "uppercase",
-            color: "#B0B5B9",
+            color: COLOR_LABEL,
             "margin-left": "4px",
           }}
         >
-          <span>Age</span>{" "}
-          <span
+          <div>Age</div>
+          <IoSettingsSharp
+            fill={COLOR_LABEL}
             style={{
+              "margin-top": "3px",
+              "margin-left": "4px",
               opacity: isHovered() ? 1 : 0,
               transition: "opacity 0.2s ease-in-out",
               cursor: "pointer",
             }}
             onClick={openSettings}
             title={`Birthday: ${birthDay.toLocaleString()}`}
-          >
-            ⚙️
-          </span>
+          />
         </div>
         <div
           style={{
@@ -85,22 +91,41 @@ export default ({
             "font-weight": "bold",
             "line-height": "0.85",
             overflow: "hidden",
-            color: "#494949",
+            color: COLOR_COUNTER,
           }}
         >
           <div>{largeAge()}</div>
           <div
             style={{
-              "font-size": "38.4px",
-              "margin-top": "5px",
-              "line-height": "1",
-              "margin-left": "7px",
-              overflow: "hidden",
-              "text-overflow": "ellipsis",
-              width: "280px",
+              display: "flex",
+              "flex-direction": "column",
             }}
           >
-            .{smallAge()}
+            <div
+              style={{
+                "font-size": "38.4px",
+                "margin-top": "5px",
+                "line-height": "1",
+                "margin-left": "7px",
+                overflow: "hidden",
+                "text-overflow": "ellipsis",
+                width: "280px",
+              }}
+            >
+              .{smallAge()}
+            </div>
+            <a
+              href="https://github.com/adipascu/solid-motivation"
+              style={{
+                "font-size": "14px",
+                color: COLOR_COUNTER,
+                "margin-left": "9px",
+                opacity: isHovered() ? 1 : 0,
+                transition: "opacity 0.2s ease-in-out",
+              }}
+            >
+              (source code)
+            </a>
           </div>
         </div>
       </div>

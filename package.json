@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@fontsource/sen": "^5.0.8",
+    "solid-icons": "^1.0.11",
     "solid-js": "^1.7.9",
     "temporal-polyfill": "^0.1.1"
   },
