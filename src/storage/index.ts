@@ -1,29 +1,53 @@
 import { Temporal } from "temporal-polyfill";
-import { Getter, Setter } from "./types";
+import { createEffect, createSignal } from "solid-js";
+import { getLocalValue, setLocalValue } from "./browser";
 
-const { getValue, setValue } = (await (window?.chrome?.storage
-  ? import("./extension")
-  : import("./browser"))) satisfies {
-  getValue: Getter;
-  setValue: Setter;
-};
+const cloudStorage = window?.chrome?.storage ? import("./extension") : null;
 
-export type BirthDay = Temporal.PlainDate | null;
+type BirthDay = Temporal.PlainDate | null;
 
-export const getBirthDay = async (): Promise<BirthDay> => {
-  const birthdayString = await new Promise<string | null>((resolve) => {
-    getValue(resolve);
-  });
+const mapToBirthDay = (birthdayString: string | null): BirthDay => {
   if (birthdayString === null) {
     return null;
   }
   return Temporal.PlainDate.from(birthdayString);
 };
 
-export const setBirthDay = async (birthday: BirthDay) => {
+const mapFromBirthDay = (birthday: BirthDay): string | null => {
   if (birthday === null) {
-    await setValue(null);
-  } else {
-    await setValue(birthday.toJSON());
+    return null;
   }
+  return birthday.toJSON();
 };
+
+// eslint-disable-next-line import/no-unused-modules -- workaround for https://github.com/import-js/eslint-plugin-import/pull/2038
+export const [getBirthDay, setBirthDay] = createSignal<BirthDay>(
+  mapToBirthDay(getLocalValue()),
+);
+
+let initialRender = true;
+createEffect(() => {
+  const value = getBirthDay();
+  if (initialRender) {
+    initialRender = false;
+    return;
+  }
+  const birthdayString = mapFromBirthDay(value);
+  setLocalValue(birthdayString);
+  if (cloudStorage) {
+    cloudStorage.then(({ setValue }) => {
+      setValue(birthdayString);
+    });
+  }
+});
+
+if (cloudStorage) {
+  cloudStorage.then(({ getValue }) => {
+    getValue((birthdayString) => {
+      const currentBirthDayString = mapFromBirthDay(getBirthDay());
+      if (birthdayString !== currentBirthDayString) {
+        setBirthDay(mapToBirthDay(birthdayString));
+      }
+    });
+  });
+}

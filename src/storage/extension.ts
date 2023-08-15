@@ -1,10 +1,16 @@
-import { Getter, Setter } from "./types";
-
 const BIRTHDAY_KEY = "birthday";
 
 const { chrome } = window;
 
-export const getValue: Getter = (obs) => {
+export const getValue = (obs: (value: string | null) => void) => {
+  chrome.storage.sync.get([BIRTHDAY_KEY], (result) => {
+    const newValue = result[BIRTHDAY_KEY];
+    if (typeof newValue === "string") {
+      obs(newValue);
+    } else {
+      obs(null);
+    }
+  });
   const cb = (
     changes: { [key: string]: { newValue?: any } },
     areaName: string,
@@ -24,7 +30,7 @@ export const getValue: Getter = (obs) => {
   };
 };
 
-export const setValue: Setter = (birthday: string | null) =>
+export const setValue = (birthday: string | null) =>
   new Promise<void>((resolve, reject) => {
     if (birthday === null) {
       chrome.storage.sync.remove(BIRTHDAY_KEY, () => {
