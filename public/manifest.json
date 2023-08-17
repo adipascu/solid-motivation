@@ -3,7 +3,6 @@
   "name": "Solid Motivation",
   "version": "1.0.0",
   "permissions": [
-    "activeTab",
     "storage"
   ],
   "chrome_url_overrides": {
