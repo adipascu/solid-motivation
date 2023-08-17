@@ -10,6 +10,37 @@ Solid Motivation is a browser extension available for both Chrome and Firefox. I
 - Elegant and distraction-free design, focusing solely on the essence of time.
 - Built harnessing the capabilities of [Solid.JS](https://solidjs.com/).
 
+## Development and Build Instructions
+
+Before diving into the steps, ensure that you have `Node.js` and `pnpm` installed. We recommend using a node version manager to handle the Node.js version and `corepack` to ensure the correct `pnpm` version.
+
+### Setup
+
+1. **Node Version Management**:
+
+   If you aren't already using a node version manager, consider using [nvm](https://github.com/nvm-sh/nvm) (Node Version Manager) or [n](https://github.com/tj/n). This helps you manage and switch between multiple Node.js versions with ease.
+
+   Once you have a version manager installed, set the Node.js version for this project based on the `engines` field in the `package.json`.
+   Run `nvm use` or `n auto` .
+
+2. **Install Corepack (If not already installed)**:
+
+   Corepack provides a zero-runtime-dependency method to invoke package managers. It's bundled with Node.js, so if you have Node.js installed, you should be good to go. If you need to install or update it manually: `npm install -g corepack`
+
+3. **Setup PNPM via Corepack**:
+
+   Corepack will ensure you're using the right version of `pnpm` as defined in the project's configuration. Run `corepack enable`.
+
+### Dependency Installation
+
+Install the project dependencies: `pnpm install`
+
+### Building the Project
+
+- **For Development**, this will start the development server, which typically offers hot-reloading: `pnpm start`
+
+- **For Production**, this will create an optimized build of the project suitable for deployment: `pnpm build`
+
 ## Installation
 
 ### Chrome
