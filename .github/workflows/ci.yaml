@@ -55,7 +55,7 @@ jobs:
         with:
           name: dist
           path: ./dist
-      - run: zip -r dist.zip ./dist
+      - run: cd dist && zip -r ../dist.zip .
       - uses: mnao305/chrome-extension-upload@v4.0.1
         with:
           file-path: ./dist.zip
@@ -64,3 +64,22 @@ jobs:
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
           publish: false
+  deploy-firefox-store:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    environment:
+      name: firefox-store
+      url: https://addons.mozilla.org/en-US/firefox/addon/${{ vars.FIREFOX_EXTENSION_ID }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: ./dist
+      - run: cd dist && zip -r ../dist.zip .
+      - uses: maoserr/firefox_extension_publish@v1.0.4
+        with:
+          firefox_extension_id: ${{ vars.FIREFOX_EXTENSION_ID }}
+          api_key: ${{ secrets.FIREFOX_ISSUER }}
+          api_secret: ${{ secrets.FIREFOX_SECRET }}
+          file: ./dist.zip
