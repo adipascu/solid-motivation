@@ -78,8 +78,10 @@ export default ({
               "margin-top": "3px",
               "margin-left": "4px",
               opacity: isHovered() ? 1 : 0,
-              transition: "opacity 0.2s ease-in-out",
+              transition:
+                "opacity 0.2s ease-in-out, transform 0.2s ease-in-out",
               cursor: "pointer",
+              transform: isHovered() ? "rotate(0deg)" : "rotate(-30deg)",
             }}
             onClick={openSettings}
             title={`Birthday: ${birthDay.toLocaleString()}`}
