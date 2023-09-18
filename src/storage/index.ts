@@ -1,5 +1,5 @@
 import { Temporal } from "temporal-polyfill";
-import { createEffect, createSignal } from "solid-js";
+import { createEffect, createRoot, createSignal } from "solid-js";
 import { getLocalValue, setLocalValue } from "./browser";
 
 const cloudStorage = window?.chrome?.storage ? import("./extension") : null;
@@ -25,20 +25,22 @@ export const [getBirthDay, setBirthDay] = createSignal<BirthDay>(
   mapToBirthDay(getLocalValue()),
 );
 
-let initialRender = true;
-createEffect(() => {
-  const value = getBirthDay();
-  if (initialRender) {
-    initialRender = false;
-    return;
-  }
-  const birthdayString = mapFromBirthDay(value);
-  setLocalValue(birthdayString);
-  if (cloudStorage) {
-    cloudStorage.then(({ setValue }) => {
-      setValue(birthdayString);
-    });
-  }
+createRoot(() => {
+  let initialRender = true;
+  createEffect(() => {
+    const value = getBirthDay();
+    if (initialRender) {
+      initialRender = false;
+      return;
+    }
+    const birthdayString = mapFromBirthDay(value);
+    setLocalValue(birthdayString);
+    if (cloudStorage) {
+      cloudStorage.then(({ setValue }) => {
+        setValue(birthdayString);
+      });
+    }
+  });
 });
 
 if (cloudStorage) {
