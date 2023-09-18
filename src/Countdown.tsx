@@ -3,6 +3,7 @@ import { Temporal } from "temporal-polyfill";
 import { IoSettingsSharp } from "solid-icons/io";
 import FONT_FAMILY from "./font";
 import getDarkMode from "./dark-signal";
+import { GIT_HASH } from "./config";
 
 const animationLoop = (cb: (time: DOMHighResTimeStamp) => void) => {
   let handle: number;
@@ -70,6 +71,7 @@ export default ({
             color: colorLabel(),
             "margin-left": "4px",
           }}
+          title={`Birthday: ${birthDay.toLocaleString()}`}
         >
           <div>Age</div>
           <IoSettingsSharp
@@ -84,7 +86,6 @@ export default ({
               transform: isHovered() ? "rotate(0deg)" : "rotate(-30deg)",
             }}
             onClick={openSettings}
-            title={`Birthday: ${birthDay.toLocaleString()}`}
           />
         </div>
         <div
@@ -128,6 +129,7 @@ export default ({
                 opacity: isHovered() ? 1 : 0,
                 transition: "opacity 0.2s ease-in-out",
               }}
+              title={GIT_HASH}
             >
               (source code)
             </a>

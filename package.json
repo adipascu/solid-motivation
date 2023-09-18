@@ -1,5 +1,5 @@
 {
-  "packageManager": "pnpm@8.6.11",
+  "packageManager": "pnpm@8.7.6",
   "engines": {
     "node": "^20.5.1"
   },
@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.0.243",
+    "@types/node": "^20.6.2",
     "eslint": "^8.46.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",
