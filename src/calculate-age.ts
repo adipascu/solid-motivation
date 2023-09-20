@@ -1,12 +1,21 @@
 import { Temporal } from "temporal-polyfill";
 
-const midnightInstant = (date: Temporal.PlainDate) =>
-  date.toZonedDateTime(Temporal.Now.timeZone()).toInstant();
-
-const calculateAge = (birthDay: Temporal.PlainDate, now: Temporal.Instant) =>
-  now.since(midnightInstant(birthDay)).total({
+export const calculateAge = (
+  birthDay: Temporal.PlainDate,
+  now: Temporal.Instant,
+  rolloverTimezone: Temporal.TimeZone | Temporal.TimeZoneProtocol,
+) => {
+  const midnightInstant = birthDay
+    .toZonedDateTime(rolloverTimezone)
+    .toInstant();
+  return now.since(midnightInstant).total({
     unit: "years",
     relativeTo: birthDay,
   });
+};
 
-export default calculateAge;
+export const calculateAgeLocal = (birthDay: Temporal.PlainDate) => {
+  const localTime = Temporal.Now.instant();
+  const localTimezone = Temporal.Now.timeZone();
+  return calculateAge(birthDay, localTime, localTimezone);
+};
