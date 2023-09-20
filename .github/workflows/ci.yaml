@@ -26,7 +26,7 @@ jobs:
           --arg version_name "1.0.${{ github.run_number }}-$GIT_HASH" \
           '.version = $version | .version_name = $version_name' \
           dist/manifest.json > tmp_manifest.json && \
-          mv tmp_manifest.json dist/manifest.json 
+          mv tmp_manifest.json dist/manifest.json
       - uses: actions/upload-artifact@v3
         with:
           name: dist
@@ -35,9 +35,16 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           path: ./dist
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/workflows/node
+      - run: pnpm test
+
   deploy-pages:
     if: github.ref == 'refs/heads/main'
-    needs: build
+    needs: [build, test]
     permissions:
       pages: write
       id-token: write
@@ -51,7 +58,7 @@ jobs:
         uses: actions/deploy-pages@v2
   deploy-chrome-store:
     if: github.ref == 'refs/heads/main'
-    needs: build
+    needs: [build, test]
     environment:
       name: chrome-store
       url: https://chrome.google.com/webstore/detail/motivation/${{ vars.CHROME_EXTENSION_ID }}
@@ -72,7 +79,7 @@ jobs:
           publish: false
   deploy-firefox-store:
     if: github.ref == 'refs/heads/main'
-    needs: build
+    needs: [build, test]
     environment:
       name: firefox-store
       url: https://addons.mozilla.org/en-US/firefox/addon/${{ vars.FIREFOX_EXTENSION_ID }}

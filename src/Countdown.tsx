@@ -4,6 +4,7 @@ import { IoSettingsSharp } from "solid-icons/io";
 import FONT_FAMILY from "./font";
 import getDarkMode from "./dark-signal";
 import { GIT_HASH } from "./config";
+import calculateAge from "./calculate-age";
 
 const animationLoop = (cb: (time: DOMHighResTimeStamp) => void) => {
   let handle: number;
@@ -15,13 +16,6 @@ const animationLoop = (cb: (time: DOMHighResTimeStamp) => void) => {
   return () => cancelAnimationFrame(handle);
 };
 
-const midnightInstant = (date: Temporal.PlainDate) =>
-  date.toZonedDateTime(Temporal.Now.timeZone()).toInstant();
-const calculateAge = (birthDay: Temporal.PlainDate) =>
-  Temporal.Now.instant().since(midnightInstant(birthDay)).total({
-    unit: "years",
-    relativeTo: birthDay,
-  });
 export default ({
   birthDay,
   openSettings,
@@ -29,11 +23,13 @@ export default ({
   birthDay: Temporal.PlainDate;
   openSettings: () => void;
 }) => {
-  const [age, setAge] = createSignal<number>(calculateAge(birthDay));
+  const [age, setAge] = createSignal<number>(
+    calculateAge(birthDay, Temporal.Now.instant()),
+  );
   const [isHovered, setIsHovered] = createSignal(false);
 
   const handle = animationLoop(() => {
-    setAge(calculateAge(birthDay));
+    setAge(calculateAge(birthDay, Temporal.Now.instant()));
   });
   onCleanup(handle);
 
