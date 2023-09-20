@@ -2,6 +2,15 @@
 
 Solid Motivation is a browser extension available for both Chrome and Firefox. It transforms your new tab page into a real-time counter displaying your age — in years, down to many decimal places. Every fraction of a second counts, emphasizing the urgency of time and inspiring you to live every moment to the fullest. This extension is powered by [Solid.JS](https://solidjs.com/) and is deeply influenced by [maccman's Motivation](https://github.com/maccman/motivation) extension.
 
+## 🌟 Additional Features
+
+- **Night Theme**: Designed to be easy on your eyes during the night, ensuring comfort and clarity.
+- **High Refresh Rate Screen Support**: Experience the real-time counter with unparalleled fluidity on high refresh rate screens.
+- **Correct Yearly Rollover**: The counter accurately transitions to a new year at midnight, keeping you in sync with real-world time.
+- **Birthday Sync Across Devices**: Set your birthdate once and have it sync seamlessly across all your devices.
+- **Refined Codebase**: A clean code structure backed by comprehensive unit tests ensures reliability and ease of modification.
+- **MIT License**: Freely use, modify, and distribute the code under the MIT License terms.
+
 <!-- markdownlint-disable MD033 -->
 
 ## Extension stores
@@ -29,7 +38,7 @@ Solid Motivation is a browser extension available for both Chrome and Firefox. I
 
 ![Screenshot of Solid Motivation](./docs/screenshot.svg)
 
-## Features
+## Core Features
 
 - Displays your age in real-time years, meticulously detailed down to numerous decimal places.
 - Elegant and distraction-free design, focusing solely on the essence of time.
