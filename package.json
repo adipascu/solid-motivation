@@ -10,7 +10,7 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.ts,.tsx --max-warnings=0",
     "lint:fix": "eslint . --fix --ext .js,.ts,.tsx --max-warnings=0",
-    "gen:chrome-refresh-token": "node --loader ts-node/esm --experimental-specifier-resolution=node ./scripts/chrome-refresh-token.ts"
+    "gen:chrome-refresh-token": "node --loader ts-node/esm ./scripts/chrome-refresh-token.ts"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.243",
@@ -41,5 +41,6 @@
     "solid-js": "^1.7.9",
     "temporal-polyfill": "^0.1.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "type": "module"
 }

@@ -1,4 +1,5 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
-module.exports = {
+// eslint-disable-next-line import/no-unused-modules
+export default {
   preset: "ts-jest",
 };
