@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js";
 import { Temporal } from "temporal-polyfill";
 import FONT_FAMILY from "./font";
-import getDarkMode from "./dark-signal";
+import { colorBackground, colorPrimary, colorSecondary } from "./colors";
 
 export default ({
   onBirthDay,
@@ -9,9 +9,6 @@ export default ({
   onBirthDay: (birthDay: Temporal.PlainDate | null) => void;
 }) => {
   const [date, setDate] = createSignal<Temporal.PlainDate | null>(null);
-  const colorLabel = () => (getDarkMode() ? "#b9b3aa" : "#b0b5b9");
-  const colorCounter = () => (getDarkMode() ? "#bab4ab" : "#494949");
-  const colorBackground = () => (getDarkMode() ? "#181a1b" : "#ffffff");
 
   return (
     <div
@@ -27,7 +24,7 @@ export default ({
           "font-family": FONT_FAMILY,
           "font-size": "19.2px",
           "font-weight": "bold",
-          color: colorCounter(),
+          color: colorPrimary(),
           "margin-bottom": "4px",
         }}
       >
@@ -41,7 +38,7 @@ export default ({
           padding: "10px",
           "font-size": "16px",
           border: "2px solid",
-          "border-color": colorLabel(),
+          "border-color": colorSecondary(),
           "border-radius": "4px",
         }}
         onKeyDown={(e) => {
@@ -71,16 +68,16 @@ export default ({
           "font-weight": "bold",
           "border-radius": "4px",
           border: "none",
-          "background-color": colorCounter(),
+          "background-color": colorPrimary(),
           color: colorBackground(),
           cursor: "pointer",
           transition: "background-color 0.2s ease",
         }}
         onMouseOver={(e) => {
-          e.currentTarget.style.backgroundColor = colorCounter();
+          e.currentTarget.style.backgroundColor = colorPrimary();
         }}
         onMouseOut={(e) => {
-          e.currentTarget.style.backgroundColor = colorLabel();
+          e.currentTarget.style.backgroundColor = colorSecondary();
         }}
       >
         Motivate

@@ -2,9 +2,9 @@ import { createSignal, onCleanup } from "solid-js";
 import { Temporal } from "temporal-polyfill";
 import { IoSettingsSharp } from "solid-icons/io";
 import FONT_FAMILY from "./font";
-import getDarkMode from "./dark-signal";
 import { GIT_HASH } from "./config";
 import { calculateAgeLocal } from "./calculate-age";
+import { colorBackground, colorPrimary, colorSecondary } from "./colors";
 
 const animationLoop = (cb: (time: DOMHighResTimeStamp) => void) => {
   let handle: number;
@@ -34,9 +34,6 @@ export default ({
   const largeAge = () => Math.floor(age()).toString();
   const smallAge = () => age().toFixed(11).split(".")[1];
 
-  const colorLabel = () => (getDarkMode() ? "#b9b3aa" : "#b0b5b9");
-  const colorCounter = () => (getDarkMode() ? "#bab4ab" : "#494949");
-  const colorBackground = () => (getDarkMode() ? "#181a1b" : "#ffffff");
   return (
     <div
       style={{
@@ -62,14 +59,14 @@ export default ({
             "font-size": "19.2px",
             "font-weight": "bold",
             "text-transform": "uppercase",
-            color: colorLabel(),
+            color: colorSecondary(),
             "margin-left": "4px",
           }}
           title={`Birthday: ${birthDay.toLocaleString()}`}
         >
           <div>Age</div>
           <IoSettingsSharp
-            fill={colorLabel()}
+            fill={colorSecondary()}
             style={{
               "margin-top": "3px",
               "margin-left": "4px",
@@ -91,7 +88,7 @@ export default ({
             "font-weight": "bold",
             "line-height": "0.85",
             overflow: "hidden",
-            color: colorCounter(),
+            color: colorPrimary(),
           }}
         >
           <div>{largeAge()}</div>
@@ -118,7 +115,7 @@ export default ({
               href="https://github.com/adipascu/solid-motivation"
               style={{
                 "font-size": "14px",
-                color: colorCounter(),
+                color: colorPrimary(),
                 "margin-left": "9px",
                 opacity: isHovered() ? 1 : 0,
                 transition: "opacity 0.2s ease-in-out",
