@@ -1,6 +1,7 @@
 import { createSignal, onCleanup } from "solid-js";
 import { Temporal } from "temporal-polyfill";
 import { IoSettingsSharp } from "solid-icons/io";
+import toast, { Toaster } from "solid-toast";
 import FONT_FAMILY from "./font";
 import { GIT_HASH } from "./config";
 import { calculateAgeLocal } from "./calculate-age";
@@ -34,6 +35,15 @@ export default ({
   const largeAge = () => Math.floor(age()).toString();
   const smallAge = () => age().toFixed(11).split(".")[1];
 
+  const copyAgeToClipboard = async () => {
+    const ageString = `${largeAge()}.${smallAge()}`;
+    try {
+      await navigator.clipboard.writeText(ageString);
+      toast.success("Age copied to clipboard!");
+    } catch (err) {
+      toast.error("Failed to copy age to clipboard!");
+    }
+  };
   return (
     <div
       style={{
@@ -43,6 +53,7 @@ export default ({
         "background-color": colorBackground(),
       }}
     >
+      <Toaster position="top-center" />
       <div
         style={{
           display: "flex",
@@ -64,7 +75,7 @@ export default ({
           }}
           title={`Birthday: ${birthDay.toLocaleString()}`}
         >
-          <div>Age</div>
+          <div onClick={copyAgeToClipboard}>Age</div>
           <IoSettingsSharp
             fill={colorSecondary()}
             style={{
@@ -80,6 +91,8 @@ export default ({
           />
         </div>
         <div
+          onClick={copyAgeToClipboard}
+          title="Click to copy age to clipboard"
           style={{
             display: "flex",
             "flex-direction": "row",
@@ -87,6 +100,8 @@ export default ({
             "font-size": "96px",
             "font-weight": "bold",
             "line-height": "0.85",
+            "user-select": "none",
+            cursor: "text",
             overflow: "hidden",
             color: colorPrimary(),
           }}

@@ -39,6 +39,7 @@
     "@fontsource/sen": "^5.0.15",
     "solid-icons": "^1.0.12",
     "solid-js": "^1.8.1",
+    "solid-toast": "^0.5.0",
     "temporal-polyfill": "^0.1.1"
   },
   "license": "MIT",
