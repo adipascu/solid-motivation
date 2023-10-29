@@ -17,6 +17,8 @@ const animationLoop = (cb: (time: DOMHighResTimeStamp) => void) => {
   return () => cancelAnimationFrame(handle);
 };
 
+const COPY_LABEL = "Click to copy age to clipboard";
+
 export default ({
   birthDay,
   openSettings,
@@ -91,8 +93,6 @@ export default ({
           />
         </div>
         <div
-          onClick={copyAgeToClipboard}
-          title="Click to copy age to clipboard"
           style={{
             display: "flex",
             "flex-direction": "row",
@@ -106,7 +106,9 @@ export default ({
             color: colorPrimary(),
           }}
         >
-          <div>{largeAge()}</div>
+          <div onClick={copyAgeToClipboard} title={COPY_LABEL}>
+            {largeAge()}
+          </div>
           <div
             style={{
               display: "flex",
@@ -114,6 +116,8 @@ export default ({
             }}
           >
             <div
+              onClick={copyAgeToClipboard}
+              title={COPY_LABEL}
               style={{
                 "font-size": "38.4px",
                 "margin-top": "5px",
