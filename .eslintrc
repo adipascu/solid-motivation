@@ -12,12 +12,13 @@
   "extends": [
     "eslint-config-airbnb-typescript",
     "eslint-config-airbnb/base",
-    "eslint-config-prettier"
+    "eslint-config-prettier",
+    "eslint:recommended",
+    "plugin:prettier/recommended"
   ],
   "env": {
     "browser": true,
     "jest": true
-
   },
   "rules": {
     "react/jsx-filename-extension": "off",
