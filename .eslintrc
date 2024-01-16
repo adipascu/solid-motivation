@@ -47,6 +47,7 @@
         "allowTernary": true,
         "enforceForJSX": true
       }
-    ]
+    ],
+    "no-restricted-syntax": "off"
   }
 }

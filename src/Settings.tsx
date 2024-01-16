@@ -2,6 +2,7 @@ import { createSignal } from "solid-js";
 import { Temporal } from "temporal-polyfill";
 import FONT_FAMILY from "./font";
 import { colorBackground, colorPrimary, colorSecondary } from "./colors";
+import { ENTER_BIRTHDAY, MOTIVATE } from "./translation";
 
 export default ({
   onBirthDay,
@@ -28,7 +29,7 @@ export default ({
           "margin-bottom": "4px",
         }}
       >
-        Enter your Birthday
+        {ENTER_BIRTHDAY}
       </label>
       <input
         autofocus
@@ -80,7 +81,7 @@ export default ({
           e.currentTarget.style.backgroundColor = colorSecondary();
         }}
       >
-        Motivate
+        {MOTIVATE}
       </button>
     </div>
   );

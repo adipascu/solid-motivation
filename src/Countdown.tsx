@@ -6,6 +6,14 @@ import FONT_FAMILY from "./font";
 import { GIT_HASH } from "./config";
 import { calculateAgeLocal } from "./calculate-age";
 import { colorBackground, colorPrimary, colorSecondary } from "./colors";
+import {
+  AGE,
+  COPY_LABEL,
+  SOURCE_CODE,
+  BIRTH_DAY_FORMAT,
+  AGE_COPIED,
+  AGE_COPY_FAILED,
+} from "./translation";
 
 const animationLoop = (cb: (time: DOMHighResTimeStamp) => void) => {
   let handle: number;
@@ -16,8 +24,6 @@ const animationLoop = (cb: (time: DOMHighResTimeStamp) => void) => {
   handle = requestAnimationFrame(loop);
   return () => cancelAnimationFrame(handle);
 };
-
-const COPY_LABEL = "Click to copy age to clipboard";
 
 export default ({
   birthDay,
@@ -41,9 +47,9 @@ export default ({
     const ageString = `${largeAge()}.${smallAge()}`;
     try {
       await navigator.clipboard.writeText(ageString);
-      toast.success("Age copied to clipboard!");
+      toast.success(AGE_COPIED);
     } catch (err) {
-      toast.error("Failed to copy age to clipboard!");
+      toast.error(AGE_COPY_FAILED);
     }
   };
   return (
@@ -75,9 +81,9 @@ export default ({
             color: colorSecondary(),
             "margin-left": "4px",
           }}
-          title={`Birthday: ${birthDay.toLocaleString()}`}
+          title={BIRTH_DAY_FORMAT(birthDay)}
         >
-          <div onClick={copyAgeToClipboard}>Age</div>
+          <div onClick={copyAgeToClipboard}>{AGE}</div>
           <IoSettingsSharp
             fill={colorSecondary()}
             style={{
@@ -141,7 +147,7 @@ export default ({
               }}
               title={GIT_HASH}
             >
-              (source code)
+              {`(${SOURCE_CODE})`}
             </a>
           </div>
         </div>
