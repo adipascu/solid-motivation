@@ -1,4 +1,6 @@
-const SUPPORTED_LANGUAGES = ["en", "ru"] as const;
+import assertUnreachable from "../assertUnreachable";
+
+const SUPPORTED_LANGUAGES = ["en", "ru", "uk"] as const;
 const DEFAULT_LANGUAGE = "en";
 
 const PREFERRED_LANGUAGES = window.navigator.languages.map((lang) =>
@@ -28,8 +30,11 @@ switch (path) {
   case "./ru":
     data = await import("./ru");
     break;
+  case "./uk":
+    data = await import("./uk");
+    break;
   default:
-    throw new Error("Language not supported");
+    assertUnreachable(path);
 }
 
 export const {
