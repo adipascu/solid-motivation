@@ -4,7 +4,7 @@ export const calculateAge = (
   birthDay: Temporal.PlainDate,
   now: Temporal.ZonedDateTime,
 ) => {
-  const midnightInstant = birthDay.toZonedDateTime(now.timeZone);
+  const midnightInstant = birthDay.toZonedDateTime(now.getTimeZone());
   return now.since(midnightInstant).total({
     unit: "years",
     relativeTo: midnightInstant,
