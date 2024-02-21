@@ -23,7 +23,7 @@ const MATCHED_LANGUAGE = getMatchedLanguage();
 const path = `./${MATCHED_LANGUAGE}` as const;
 let data;
 switch (path) {
-  // TODO: remove workaround for TypeScript limitation
+  // TODO: remove workaround for TypeScript limitation https://github.com/microsoft/TypeScript/issues/32401
   case "./en":
     data = await import("./en");
     break;
