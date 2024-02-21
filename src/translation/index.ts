@@ -1,6 +1,6 @@
 import assertUnreachable from "../assertUnreachable";
 
-const SUPPORTED_LANGUAGES = ["en", "ru", "uk", "cs", "de"] as const;
+const SUPPORTED_LANGUAGES = ["en", "ru", "uk", "cs", "de", "pt"] as const;
 const DEFAULT_LANGUAGE = "en";
 
 const PREFERRED_LANGUAGES = window.navigator.languages.map((lang) =>
@@ -38,6 +38,9 @@ switch (path) {
     break;
   case "./de":
     data = await import("./de");
+    break;
+  case "./pt":
+    data = await import("./pt");
     break;
   default:
     assertUnreachable(path);
