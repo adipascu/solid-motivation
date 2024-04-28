@@ -1,5 +1,9 @@
 # Solid Motivation - Browser Extension
 
+[![Build Status](https://img.shields.io/github/actions/workflow/status/adipascu/solid-motivation/ci.yaml?branch=main&style=for-the-badge&logo=github)](https://github.com/adipascu/solid-motivation/actions/workflows/ci.yaml?query=branch%3Amain)
+[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/ebnfiihobaicohplfgeenddclnjblfkc?style=for-the-badge&logo=googlechrome&label=Chrome%20Users)](https://chrome.google.com/webstore/detail/solid-motivation/ebnfiihobaicohplfgeenddclnjblfkc)
+[![Mozilla Add-on Users](https://img.shields.io/amo/users/solid-motivation?style=for-the-badge&logo=firefox&label=Firefox%20Users)](https://addons.mozilla.org/en-US/firefox/addon/solid-motivation/)
+
 Solid Motivation is a browser extension available for both Chrome and Firefox. It transforms your new tab page into a real-time counter displaying your age — in years, down to many decimal places. Every fraction of a second counts, emphasizing the urgency of time and inspiring you to live every moment to the fullest. This extension is powered by [Solid.JS](https://solidjs.com/) and is deeply influenced by [maccman's Motivation](https://github.com/maccman/motivation) extension.
 
 ## 🌟 Additional Features
