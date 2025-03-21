@@ -27,7 +27,7 @@ jobs:
           '.version = $version | .version_name = $version_name' \
           dist/manifest.json > tmp_manifest.json && \
           mv tmp_manifest.json dist/manifest.json
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: dist
           path: ./dist
