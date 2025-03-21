@@ -24,7 +24,7 @@ Solid Motivation is a browser extension available for both Chrome and Firefox. I
     href="https://chrome.google.com/webstore/detail/solid-motivation/ebnfiihobaicohplfgeenddclnjblfkc"
   >
     <img
-      src="https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/iNEddTyWiMfLSwFD6qGq.png"
+      src="https://github.com/user-attachments/assets/d984c54a-ce0b-4cb8-9158-0d0850d5fbde"
       style="max-width: 100%"
     />
   </a>
