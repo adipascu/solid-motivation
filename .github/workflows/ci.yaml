@@ -56,27 +56,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-  deploy-chrome-store:
-    if: github.ref == 'refs/heads/main'
-    needs: [build, test]
-    environment:
-      name: chrome-store
-      url: https://chrome.google.com/webstore/detail/motivation/${{ vars.CHROME_EXTENSION_ID }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: dist
-          path: ./dist
-      - run: cd dist && zip -r ../dist.zip .
-      - uses: mnao305/chrome-extension-upload@v4.0.1
-        with:
-          file-path: ./dist.zip
-          extension-id: ${{ vars.CHROME_EXTENSION_ID }}
-          client-id: ${{ secrets.CHROME_CLIENT_ID }}
-          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
-          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
-          publish: false
   deploy-firefox-store:
     if: github.ref == 'refs/heads/main'
     needs: [build, test]
