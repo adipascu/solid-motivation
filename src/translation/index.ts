@@ -3,8 +3,8 @@ import assertUnreachable from "../assertUnreachable";
 const SUPPORTED_LANGUAGES = ["en", "ru", "uk", "cs", "de", "pt", "fr"] as const;
 const DEFAULT_LANGUAGE = "en";
 
-const PREFERRED_LANGUAGES = window.navigator.languages.map((lang) =>
-  lang.slice(0, 2),
+const PREFERRED_LANGUAGES = window.navigator.languages.map(
+  (lang) => lang.split("-")[0],
 );
 
 const getMatchedLanguage = () => {
