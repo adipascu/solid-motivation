@@ -9,7 +9,8 @@
     "build:watch": "vite build --watch",
     "test": "jest",
     "lint": "eslint . --ext .js,.ts,.tsx --max-warnings=0",
-    "lint:fix": "eslint . --fix --ext .js,.ts,.tsx --max-warnings=0"
+    "lint:fix": "eslint . --fix --ext .js,.ts,.tsx --max-warnings=0",
+    "gen:chrome-refresh-token": "chrome-webstore-upload-keys"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.310",
@@ -17,6 +18,7 @@
     "@types/node": "^22.13.11",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
+    "chrome-webstore-upload-keys": "^1.1.5",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",

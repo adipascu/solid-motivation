@@ -39,6 +39,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^7.18.0
         version: 7.18.0(eslint@8.57.1)(typescript@5.8.2)
+      chrome-webstore-upload-keys:
+        specifier: ^1.1.5
+        version: 1.1.5
       eslint:
         specifier: ^8.57.1
         version: 8.57.1
@@ -1075,6 +1078,11 @@ packages:
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
+
+  chrome-webstore-upload-keys@1.1.5:
+    resolution: {integrity: sha512-DFZd8xVIpNYgUKWDEq47XSwBMbZ6khmDd9m3L9e+3QMmx+wlI6SbDUxjrPewKHIkWJfTBJy3as0BgSuogUQk/A==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   ci-info@3.9.0:
     resolution: {integrity: sha512-NIxF55hv4nSqQswkAeiOi1r83xy8JldOFDTWiug55KBu9Jnblncd2U6ViHmYgHf01TPZS77NJBhBMKdWj9HQMQ==}
@@ -3981,6 +3989,8 @@ snapshots:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.3
+
+  chrome-webstore-upload-keys@1.1.5: {}
 
   ci-info@3.9.0: {}
 
