@@ -1,19 +1,22 @@
 import assertUnreachable from "../assertUnreachable";
 
 const SUPPORTED_LANGUAGES = [
-  "en",
-  "ru",
-  "uk",
-  "cs",
-  "de",
-  "pt",
-  "fr",
-  "zh",
+  "en", // English
+  "ru", // Russian
+  "uk", // Ukrainian
+  "cs", // Czech
+  "de", // German
+  "pt", // Portuguese
+  "fr", // French
+  "zh", // Chinese
+  "pl", // Polish
+  "es", // Spanish
+  "sv", // Swedish
 ] as const;
 const DEFAULT_LANGUAGE = "en";
 
 const PREFERRED_LANGUAGES = window.navigator.languages.map(
-  (lang) => lang.split("-")[0]
+  (lang) => lang.split("-")[0],
 );
 
 const getMatchedLanguage = () => {
@@ -56,6 +59,15 @@ switch (path) {
     break;
   case "./zh":
     data = await import("./zh");
+    break;
+  case "./pl":
+    data = await import("./pl");
+    break;
+  case "./es":
+    data = await import("./es");
+    break;
+  case "./sv":
+    data = await import("./sv");
     break;
   default:
     assertUnreachable(path);
