@@ -12,6 +12,7 @@ const SUPPORTED_LANGUAGES = [
   "pl", // Polish
   "es", // Spanish
   "sv", // Swedish
+  "he", // Hebrew
 ] as const;
 const DEFAULT_LANGUAGE = "en";
 
@@ -68,6 +69,9 @@ switch (path) {
     break;
   case "./sv":
     data = await import("./sv");
+    break;
+  case "./he":
+    data = await import("./he");
     break;
   default:
     assertUnreachable(path);
