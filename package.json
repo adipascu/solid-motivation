@@ -1,5 +1,5 @@
 {
-  "packageManager": "pnpm@9.10.0",
+  "packageManager": "pnpm@10.10.0",
   "engines": {
     "node": "^22.8.0"
   },
