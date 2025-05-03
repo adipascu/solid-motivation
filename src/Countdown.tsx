@@ -137,6 +137,18 @@ export default ({
               .{smallAge()}
             </div>
             <a
+              style={{
+                "font-size": "11.5px",
+                "margin-bottom": "5px",
+                "font-family": FONT_FAMILY,
+                "margin-left": "7px",
+                color: colorSecondary(),
+              }}
+              href="https://chromewebstore.google.com/detail/ebnfiihobaicohplfgeenddclnjblfkc"
+            >
+              Rate us on the Chrome Web Store! (click to hide)
+            </a>
+            <a
               href="https://github.com/adipascu/solid-motivation"
               style={{
                 "font-size": "14px",
