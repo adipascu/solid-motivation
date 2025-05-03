@@ -22,7 +22,7 @@ const mapFromBirthDay = (birthday: BirthDay): string | null => {
 
 // eslint-disable-next-line import/no-unused-modules -- workaround for https://github.com/import-js/eslint-plugin-import/pull/2038
 export const [getBirthDay, setBirthDay] = createSignal<BirthDay>(
-  mapToBirthDay(getLocalValue()),
+  mapToBirthDay(getLocalValue())
 );
 
 createRoot(() => {
@@ -53,3 +53,24 @@ if (cloudStorage) {
     });
   });
 }
+
+export let INSTALL_DATE = (() => {
+  const date = localStorage.getItem("install_date");
+  if (date) {
+    return Temporal.Instant.from(date);
+  } else {
+    const newDate = Temporal.Now.instant();
+    window?.chrome?.storage?.sync?.set({
+      install_date: newDate.toString(),
+    });
+    localStorage.setItem("install_date", newDate.toString());
+    return newDate;
+  }
+})();
+
+window?.chrome?.storage?.sync?.get(["install_date"], (result) => {
+  const date = result["install_date"];
+  if (date) {
+    INSTALL_DATE = Temporal.Instant.from(date);
+  }
+});

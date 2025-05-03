@@ -14,6 +14,7 @@ import {
   AGE_COPIED,
   AGE_COPY_FAILED,
 } from "./translation";
+import { INSTALL_DATE } from "./storage";
 
 const animationLoop = (cb: (time: DOMHighResTimeStamp) => void) => {
   let handle: number;
@@ -52,6 +53,12 @@ export default ({
       toast.error(AGE_COPY_FAILED);
     }
   };
+  const installDate: Temporal.Instant = INSTALL_DATE;
+  const now = Temporal.Now.instant();
+  const diff = now.since(installDate);
+  // const showRateUs = diff.total({ unit: "seconds" }) > 1;
+  const showRateUs = diff.total({ unit: "days" }) > 1;
+
   return (
     <div
       style={{
@@ -136,18 +143,20 @@ export default ({
             >
               .{smallAge()}
             </div>
-            <a
-              style={{
-                "font-size": "11.5px",
-                "margin-bottom": "5px",
-                "font-family": FONT_FAMILY,
-                "margin-left": "7px",
-                color: colorSecondary(),
-              }}
-              href="https://chromewebstore.google.com/detail/ebnfiihobaicohplfgeenddclnjblfkc"
-            >
-              Rate us on the Chrome Web Store! (click to hide)
-            </a>
+            {showRateUs && (
+              <a
+                style={{
+                  "font-size": "11.5px",
+                  "margin-bottom": "6px",
+                  "font-family": FONT_FAMILY,
+                  "margin-left": "7px",
+                  color: colorSecondary(),
+                }}
+                href="https://chromewebstore.google.com/detail/ebnfiihobaicohplfgeenddclnjblfkc"
+              >
+                Rate us on the Chrome Web Store! (click to hide)
+              </a>
+            )}
             <a
               href="https://github.com/adipascu/solid-motivation"
               style={{
