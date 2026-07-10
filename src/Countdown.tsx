@@ -86,7 +86,15 @@ export default ({
           }}
           title={BIRTH_DAY_FORMAT(birthDay)}
         >
-          <div onClick={copyAgeToClipboard}>{AGE}</div>
+          <div 
+            onClick={copyAgeToClipboard} 
+            role="button" 
+            tabIndex={0} 
+            aria-label={`Copy ${AGE} to clipboard`}
+            onKeyDown={(e) => e.key === 'Enter' && copyAgeToClipboard()}
+          >
+            {AGE}
+          </div>
           <IoSettingsSharp
             fill={colorSecondary()}
             style={{
@@ -98,6 +106,10 @@ export default ({
               cursor: "pointer",
               transform: isHovered() ? "rotate(0deg)" : "rotate(-30deg)",
             }}
+            role="button"
+            tabIndex={0}
+            aria-label="Open settings"
+            onKeyDown={(e) => e.key === 'Enter' && openSettings()}
             onClick={openSettings}
           />
         </div>
@@ -114,8 +126,16 @@ export default ({
             overflow: "hidden",
             color: colorPrimary(),
           }}
+          role="timer"
+          aria-label="Real-time age counter"
         >
-          <div onClick={copyAgeToClipboard} title={COPY_LABEL}>
+          <div 
+            onClick={copyAgeToClipboard} 
+            title={COPY_LABEL}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && copyAgeToClipboard()}
+          >
             {largeAge()}
           </div>
           <div
