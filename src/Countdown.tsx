@@ -151,7 +151,7 @@ export default ({
                 onClick={setAppReviewed}
                 href={REVIEW_URL}
               >
-                Rate us on the Chrome Web Store! (click to hide)
+                rate this extension on Chrome Web Store (click to hide)
               </a>
             )}
             <a
