@@ -49,13 +49,16 @@ export default ({
   const smallAge = () => age().toFixed(11).split(".")[1];
 
   const copyAgeToClipboard = async () => {
-    const ageString = `${largeAge()}.${smallAge()}`;
     try {
-      await navigator.clipboard.writeText(ageString);
+      await navigator.clipboard.writeText(`${largeAge()}.${smallAge()}`);
       toast.success(AGE_COPIED);
-    } catch (err) {
+    } catch {
       toast.error(AGE_COPY_FAILED);
     }
+  };
+
+  const onCopyAge = () => {
+    void copyAgeToClipboard();
   };
   const reviewUrl = getReviewUrl();
   return (
@@ -92,7 +95,7 @@ export default ({
           <button
             type="button"
             aria-label={COPY_LABEL}
-            onClick={copyAgeToClipboard}
+            onClick={onCopyAge}
             style={{
               font: "inherit",
               color: "inherit",
@@ -149,7 +152,7 @@ export default ({
             color: colorPrimary(),
           }}
         >
-          <div onClick={copyAgeToClipboard} title={COPY_LABEL}>
+          <div onClick={onCopyAge} title={COPY_LABEL}>
             {largeAge()}
           </div>
           <div
@@ -159,7 +162,7 @@ export default ({
             }}
           >
             <div
-              onClick={copyAgeToClipboard}
+              onClick={onCopyAge}
               title={COPY_LABEL}
               style={{
                 "font-size": "38.4px",

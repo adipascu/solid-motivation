@@ -15,6 +15,13 @@ export default ({
   const [date, setDate] = createSignal<Temporal.PlainDate | null>(null);
   const [isHovered, setIsHovered] = createSignal(false);
 
+  const submitBirthDay = () => {
+    const inputDate = date();
+    if (inputDate) {
+      onBirthDay(inputDate);
+    }
+  };
+
   return (
     <div
       style={{
@@ -50,10 +57,7 @@ export default ({
         }}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            const inputDate = date();
-            if (inputDate) {
-              onBirthDay(inputDate);
-            }
+            submitBirthDay();
           }
         }}
         onInput={(e) => {
@@ -62,13 +66,7 @@ export default ({
       />
       <button
         disabled={date() === null}
-        onClick={() => {
-          const inputDate = date();
-          if (!inputDate) {
-            throw new Error("Birthday not set");
-          }
-          onBirthDay(inputDate);
-        }}
+        onClick={submitBirthDay}
         style={{
           padding: "10px 20px",
           "font-size": "16px",
