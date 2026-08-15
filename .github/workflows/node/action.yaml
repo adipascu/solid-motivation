@@ -3,7 +3,7 @@ runs:
   steps:
     - run: corepack enable
       shell: bash
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
       with:
         node-version-file: "package.json"
         cache: "pnpm"

@@ -3,17 +3,20 @@ name: CI
 on:
   push:
 
+permissions:
+  contents: read
+
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - uses: ./.github/workflows/node
       - run: pnpm run lint
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - uses: ./.github/workflows/node
       - run: pnpm run build
       - name: Log run number, attempt and id
@@ -27,24 +30,24 @@ jobs:
           '.version = $version | .version_name = $version_name' \
           dist/manifest.json > tmp_manifest.json && \
           mv tmp_manifest.json dist/manifest.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: dist
           path: ./dist
       - name: Upload build artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: ./dist
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - uses: ./.github/workflows/node
       - run: pnpm test
 
   deploy-pages:
     if: github.ref == 'refs/heads/main'
-    needs: [build, test]
+    needs: [lint, build, test]
     permissions:
       pages: write
       id-token: write
@@ -55,21 +58,21 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
   deploy-chrome-store:
     if: github.ref == 'refs/heads/main'
-    needs: [build, test]
+    needs: [lint, build, test]
     environment:
       name: chrome-store
       url: https://chrome.google.com/webstore/detail/motivation/${{ vars.CHROME_EXTENSION_ID }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: dist
           path: ./dist
       - run: cd dist && zip -r ../dist.zip .
-      - uses: mnao305/chrome-extension-upload@v5.0.0
+      - uses: mnao305/chrome-extension-upload@4008e29e13c144d0f6725462cbd49b7c291b4928 # v5.0.0
         with:
           file-path: ./dist.zip
           extension-id: ${{ vars.CHROME_EXTENSION_ID }}
@@ -79,18 +82,18 @@ jobs:
           publish: true
   deploy-firefox-store:
     if: github.ref == 'refs/heads/main'
-    needs: [build, test]
+    needs: [lint, build, test]
     environment:
       name: firefox-store
       url: https://addons.mozilla.org/en-US/firefox/addon/${{ vars.FIREFOX_EXTENSION_ID }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: dist
           path: ./dist
       - run: cd dist && zip -r ../dist.zip .
-      - uses: maoserr/firefox_extension_publish@v1.0.4
+      - uses: maoserr/firefox_extension_publish@1e1144f073dbdc5cc9c5c0e601823d4825e48455 # v1.0.4
         with:
           firefox_extension_id: ${{ vars.FIREFOX_EXTENSION_ID }}
           api_key: ${{ secrets.FIREFOX_ISSUER }}
