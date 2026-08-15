@@ -10,3 +10,4 @@ export const AGE_COPY_FAILED = "Не вдалося скопіювати вік 
 export const ENTER_BIRTHDAY = "Введіть свій день народження";
 export const MOTIVATE = "Мотивуйте";
 export const RATE_APP = "Оцініть це розширення (натисніть, щоб приховати)";
+export const SETTINGS_LABEL = "Змінити дату народження";

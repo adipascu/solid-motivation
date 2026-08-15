@@ -1,4 +1,5 @@
 import assertUnreachable from "../assertUnreachable";
+import textDirection from "../text-direction";
 
 const SUPPORTED_LANGUAGES = [
   "en", // English
@@ -87,4 +88,8 @@ export const {
   ENTER_BIRTHDAY,
   MOTIVATE,
   RATE_APP,
+  SETTINGS_LABEL,
 } = data;
+
+export const LANGUAGE = MATCHED_LANGUAGE;
+export const TEXT_DIRECTION = textDirection(MATCHED_LANGUAGE);

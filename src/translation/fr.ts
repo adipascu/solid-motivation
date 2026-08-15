@@ -11,3 +11,4 @@ export const AGE_COPY_FAILED =
 export const ENTER_BIRTHDAY = "Entrez votre date de naissance";
 export const MOTIVATE = "Motiver";
 export const RATE_APP = "Évaluez cette extension (cliquez pour masquer)";
+export const SETTINGS_LABEL = "Modifier votre date de naissance";

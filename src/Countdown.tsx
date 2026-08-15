@@ -14,6 +14,7 @@ import {
   AGE_COPIED,
   AGE_COPY_FAILED,
   RATE_APP,
+  SETTINGS_LABEL,
 } from "./translation";
 import { setAppReviewed, showRateApp } from "./storage";
 import { getReviewUrl } from "./review-url";
@@ -37,6 +38,7 @@ export default ({
 }) => {
   const [age, setAge] = createSignal<number>(calculateAgeLocal(birthDay));
   const [isHovered, setIsHovered] = createSignal(false);
+  const [isFocused, setIsFocused] = createSignal(false);
 
   const handle = animationLoop(() => {
     setAge(calculateAgeLocal(birthDay));
@@ -83,24 +85,55 @@ export default ({
             "font-weight": "bold",
             "text-transform": "uppercase",
             color: colorSecondary(),
-            "margin-left": "4px",
+            "margin-inline-start": "4px",
           }}
           title={BIRTH_DAY_FORMAT(birthDay)}
         >
-          <div onClick={copyAgeToClipboard}>{AGE}</div>
-          <IoSettingsSharp
-            fill={colorSecondary()}
+          <button
+            type="button"
+            aria-label={COPY_LABEL}
+            onClick={copyAgeToClipboard}
             style={{
-              "margin-top": "3px",
-              "margin-left": "4px",
-              opacity: isHovered() ? 1 : 0,
-              transition:
-                "opacity 0.2s ease-in-out, transform 0.2s ease-in-out",
+              font: "inherit",
+              color: "inherit",
+              "text-transform": "inherit",
+              background: "none",
+              border: "none",
+              padding: "0",
               cursor: "pointer",
-              transform: isHovered() ? "rotate(0deg)" : "rotate(-30deg)",
             }}
+          >
+            {AGE}
+          </button>
+          <button
+            type="button"
+            aria-label={SETTINGS_LABEL}
             onClick={openSettings}
-          />
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            style={{
+              display: "flex",
+              background: "none",
+              border: "none",
+              padding: "0",
+              cursor: "pointer",
+              opacity: isHovered() || isFocused() ? 1 : 0,
+              transition: "opacity 0.2s ease-in-out",
+            }}
+          >
+            <IoSettingsSharp
+              fill={colorSecondary()}
+              style={{
+                "margin-top": "3px",
+                "margin-inline-start": "4px",
+                transition: "transform 0.2s ease-in-out",
+                transform:
+                  isHovered() || isFocused()
+                    ? "rotate(0deg)"
+                    : "rotate(-30deg)",
+              }}
+            />
+          </button>
         </div>
         <div
           style={{
@@ -132,7 +165,7 @@ export default ({
                 "font-size": "38.4px",
                 "margin-top": "5px",
                 "line-height": "1",
-                "margin-left": "7px",
+                "margin-inline-start": "7px",
                 overflow: "hidden",
                 "text-overflow": "ellipsis",
                 width: "280px",
@@ -147,7 +180,7 @@ export default ({
                     "font-size": "11.5px",
                     "margin-bottom": "6px",
                     "font-family": FONT_FAMILY,
-                    "margin-left": "7px",
+                    "margin-inline-start": "7px",
                     color: colorPrimary(),
                   }}
                   onClick={setAppReviewed}
@@ -164,11 +197,13 @@ export default ({
               style={{
                 "font-size": "14px",
                 color: colorPrimary(),
-                "margin-left": "9px",
-                opacity: isHovered() ? 1 : 0,
+                "margin-inline-start": "9px",
+                opacity: isHovered() || isFocused() ? 1 : 0,
                 transition: "opacity 0.2s ease-in-out",
               }}
               title={GIT_HASH}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
             >
               {`(${SOURCE_CODE})`}
             </a>

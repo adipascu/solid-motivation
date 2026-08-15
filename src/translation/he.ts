@@ -10,3 +10,4 @@ export const AGE_COPY_FAILED = "נכשלה העתקת הגיל ללוח הגזי
 export const ENTER_BIRTHDAY = "נא למלא את יום ההולדת שלך";
 export const MOTIVATE = "יאללה מוטיבציה";
 export const RATE_APP = "דרגו את התוסף הזה (לחצו כדי להסתיר)";
+export const SETTINGS_LABEL = "שינוי יום ההולדת";

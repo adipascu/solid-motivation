@@ -10,3 +10,4 @@ export const AGE_COPY_FAILED = "Věk se nepodařilo zkopírovat do schránky!";
 export const ENTER_BIRTHDAY = "Zadejte své narozeniny";
 export const MOTIVATE = "Motivovat";
 export const RATE_APP = "Ohodnoťte toto rozšíření (kliknutím skryjete)";
+export const SETTINGS_LABEL = "Změnit datum narození";
