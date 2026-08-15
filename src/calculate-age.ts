@@ -4,7 +4,7 @@ export const calculateAge = (
   birthDay: Temporal.PlainDate,
   now: Temporal.ZonedDateTime,
 ) => {
-  const midnightInstant = birthDay.toZonedDateTime(now.getTimeZone());
+  const midnightInstant = birthDay.toZonedDateTime(now.timeZoneId);
   return now.since(midnightInstant).total({
     unit: "years",
     relativeTo: midnightInstant,
@@ -12,6 +12,6 @@ export const calculateAge = (
 };
 
 export const calculateAgeLocal = (birthDay: Temporal.PlainDate) => {
-  const localTime = Temporal.Now.zonedDateTime("gregory");
+  const localTime = Temporal.Now.zonedDateTimeISO().withCalendar("gregory");
   return calculateAge(birthDay.withCalendar("gregory"), localTime);
 };
