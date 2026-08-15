@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { reviewUrlForBrowser } from "./review-url";
 
 const CHROME_STORE_URL =

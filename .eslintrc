@@ -18,11 +18,16 @@
     "plugin:prettier/recommended"
   ],
   "env": {
-    "browser": true,
-    "jest": true
+    "browser": true
   },
   "rules": {
     "react/jsx-filename-extension": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.test.ts", "vite.config.mts"]
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",

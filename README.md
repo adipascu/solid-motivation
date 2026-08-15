@@ -59,7 +59,7 @@ pnpm install
 | --- | --- |
 | `pnpm start` | Vite dev server with hot reload |
 | `pnpm build` | Production build into `dist/` |
-| `pnpm test` | Jest unit tests |
+| `pnpm test` | Vitest unit tests |
 | `pnpm lint` | ESLint, warnings treated as errors |
 
 Age arithmetic lives in [`src/calculate-age.ts`](src/calculate-age.ts). It uses [`temporal-polyfill`](https://github.com/fullcalendar/temporal-polyfill) so that time zones, DST and leap years are the library's problem rather than ours.
