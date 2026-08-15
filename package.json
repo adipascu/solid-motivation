@@ -38,7 +38,7 @@
     "solid-icons": "^1.2.0",
     "solid-js": "^1.9.14",
     "solid-toast": "^0.5.0",
-    "temporal-polyfill": "0.2.4"
+    "temporal-polyfill": "^1.0.3"
   },
   "license": "MIT",
   "type": "module"

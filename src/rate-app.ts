@@ -38,7 +38,7 @@ export const shouldShowRateApp = (
   if (appReviewed) {
     return false;
   }
-  const installedAt = installDate.toZonedDateTimeISO(now.getTimeZone());
+  const installedAt = installDate.toZonedDateTimeISO(now.timeZoneId);
   const months = installedAt.until(now).total({
     unit: "months",
     relativeTo: installedAt,

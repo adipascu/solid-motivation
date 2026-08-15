@@ -45,14 +45,14 @@ describe("calculateAge", () => {
   it("calculates age correctly from leap year to leap year", () => {
     const birthDate = Temporal.PlainDate.from("2000-02-29");
     const now = Temporal.ZonedDateTime.from("2020-02-28T00:00:00Z[UTC]");
-    expect(calculateAge(birthDate, now)).toBe(20);
+    expect(calculateAge(birthDate, now)).toBe(19.997267759562842);
 
     expect(
       calculateAge(
         birthDate,
         Temporal.ZonedDateTime.from("2024-02-28T12:00:00Z[UTC]"),
       ),
-    ).toBe(24.0013698630137);
+    ).toBe(23.99863387978142);
 
     const nextDay = Temporal.ZonedDateTime.from("2020-02-29T00:00:00Z[UTC]");
     expect(calculateAge(birthDate, nextDay)).toBe(20);
@@ -61,7 +61,7 @@ describe("calculateAge", () => {
   it("calculates age correctly on leap day of a non-leap year", () => {
     const birthDate = Temporal.PlainDate.from("2000-02-29");
     const now = Temporal.ZonedDateTime.from("2023-02-28T23:59:59Z[UTC]");
-    expect(calculateAge(birthDate, now)).toBe(23.002739694317604);
+    expect(calculateAge(birthDate, now)).toBe(23.002732208814006);
   });
 
   it("calculates age correctly within the same year", () => {
