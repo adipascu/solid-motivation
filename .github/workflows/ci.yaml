@@ -60,7 +60,9 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
   deploy-chrome-store:
-    if: github.ref == 'refs/heads/main'
+    # Disabled until the store credentials are fixed, see
+    # https://github.com/adipascu/solid-motivation/issues/30
+    if: false
     needs: [lint, build, test]
     environment:
       name: chrome-store
