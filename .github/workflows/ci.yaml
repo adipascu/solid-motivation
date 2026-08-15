@@ -13,6 +13,19 @@ jobs:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - uses: ./.github/workflows/node
       - run: pnpm run lint
+      - run: pnpm run format:check
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: ./.github/workflows/node
+      - run: pnpm run typecheck
+  knip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: ./.github/workflows/node
+      - run: pnpm run knip
   build:
     runs-on: ubuntu-latest
     steps:
@@ -47,7 +60,7 @@ jobs:
 
   deploy-pages:
     if: github.ref == 'refs/heads/main'
-    needs: [lint, build, test]
+    needs: [lint, typecheck, knip, build, test]
     permissions:
       pages: write
       id-token: write
@@ -63,7 +76,7 @@ jobs:
     # Disabled until the store credentials are fixed, see
     # https://github.com/adipascu/solid-motivation/issues/30
     if: false
-    needs: [lint, build, test]
+    needs: [lint, typecheck, knip, build, test]
     environment:
       name: chrome-store
       url: https://chrome.google.com/webstore/detail/motivation/${{ vars.CHROME_EXTENSION_ID }}
@@ -84,7 +97,7 @@ jobs:
           publish: true
   deploy-firefox-store:
     if: github.ref == 'refs/heads/main'
-    needs: [lint, build, test]
+    needs: [lint, typecheck, knip, build, test]
     environment:
       name: firefox-store
       url: https://addons.mozilla.org/en-US/firefox/addon/${{ vars.FIREFOX_EXTENSION_ID }}

@@ -55,12 +55,20 @@ corepack enable
 pnpm install
 ```
 
-| Command | What it does |
-| --- | --- |
-| `pnpm start` | Vite dev server with hot reload |
-| `pnpm build` | Production build into `dist/` |
-| `pnpm test` | Vitest unit tests |
-| `pnpm lint` | ESLint, warnings treated as errors |
+| Command           | What it does                                        |
+| ----------------- | --------------------------------------------------- |
+| `pnpm start`      | Vite dev server with hot reload                     |
+| `pnpm build`      | Production build into `dist/`                       |
+| `pnpm test`       | Vitest unit tests, gated on full coverage of `src/` |
+| `pnpm test:watch` | Vitest in watch mode, without the coverage gate     |
+| `pnpm typecheck`  | TypeScript, no emit                                 |
+| `pnpm lint`       | ESLint, warnings treated as errors                  |
+| `pnpm knip`       | Unused files, exports and dependencies              |
+| `pnpm format`     | Prettier over the whole repository                  |
+
+Every line, statement, branch and function in `src/` has to be covered for `pnpm test` to pass, so a new module arrives with its tests. Code that genuinely cannot be reached, such as the exhaustiveness guard in `src/translation/index.ts`, is marked with a `/* v8 ignore */` pragma rather than lowering the threshold.
+
+A `husky` pre-commit hook formats and lints the staged files through `lint-staged`, then runs the lint, format, typecheck, test and knip suites over the whole repository. Only `pnpm build` is left to CI.
 
 Age arithmetic lives in [`src/calculate-age.ts`](src/calculate-age.ts). It uses [`temporal-polyfill`](https://github.com/fullcalendar/temporal-polyfill) so that time zones, DST and leap years are the library's problem rather than ours.
 

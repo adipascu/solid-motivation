@@ -74,6 +74,7 @@ switch (path) {
   case "./he":
     data = await import("./he");
     break;
+  /* v8 ignore next 2 */
   default:
     assertUnreachable(path);
 }

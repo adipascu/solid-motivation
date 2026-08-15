@@ -3,9 +3,7 @@
   "name": "Solid Motivation",
   "version": "1.0.0",
   "description": "Turns every new tab into a live counter of your age, down to the fraction of a second.",
-  "permissions": [
-    "storage"
-  ],
+  "permissions": ["storage"],
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

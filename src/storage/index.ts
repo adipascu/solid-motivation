@@ -15,7 +15,6 @@ const mapFromBirthDay = (birthday: BirthDay): string | null => {
   return birthday.toJSON();
 };
 
-// eslint-disable-next-line import/no-unused-modules -- workaround for https://github.com/import-js/eslint-plugin-import/pull/2038
 export const [getBirthDay, setBirthDay] = createSignal<BirthDay>(
   parsePlainDate(getLocalValue()),
 );
@@ -31,15 +30,13 @@ createRoot(() => {
     const birthdayString = mapFromBirthDay(value);
     setLocalValue(birthdayString);
     if (cloudStorage) {
-      cloudStorage.then(({ setValue }) => {
-        setValue(birthdayString);
-      });
+      void cloudStorage.then(({ setValue }) => setValue(birthdayString));
     }
   });
 });
 
 if (cloudStorage) {
-  cloudStorage.then(({ getValue }) => {
+  void cloudStorage.then(({ getValue }) => {
     getValue((birthdayString) => {
       const currentBirthDayString = mapFromBirthDay(getBirthDay());
       if (birthdayString !== currentBirthDayString) {
@@ -73,7 +70,7 @@ window?.chrome?.storage?.sync?.get([INSTALL_DATE_KEY], (result) => {
     localStorage.setItem(INSTALL_DATE_KEY, installDate.toString());
   }
   if (updateCloud) {
-    window?.chrome?.storage?.sync?.set({
+    void window?.chrome?.storage?.sync?.set({
       [INSTALL_DATE_KEY]: installDate.toString(),
     });
   }
@@ -88,7 +85,7 @@ window?.chrome?.storage?.sync?.get([APP_REVIEWED_KEY], (result) => {
     setAppReviewedSignal(true);
     localStorage.setItem(APP_REVIEWED_KEY, "true");
   } else if (getAppReviewed()) {
-    window?.chrome?.storage?.sync?.set({ [APP_REVIEWED_KEY]: true });
+    void window?.chrome?.storage?.sync?.set({ [APP_REVIEWED_KEY]: true });
   }
 });
 
@@ -102,5 +99,5 @@ export const showRateApp = () =>
 export const setAppReviewed = () => {
   setAppReviewedSignal(true);
   localStorage.setItem(APP_REVIEWED_KEY, "true");
-  window?.chrome?.storage?.sync?.set({ [APP_REVIEWED_KEY]: true });
+  void window?.chrome?.storage?.sync?.set({ [APP_REVIEWED_KEY]: true });
 };

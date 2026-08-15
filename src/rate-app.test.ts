@@ -159,6 +159,16 @@ describe("shouldShowRateApp", () => {
     ).toBe(false);
   });
 
+  it("hides the prompt when the install happened this very instant", () => {
+    expect(
+      shouldShowRateApp(
+        instant("2025-01-01T00:00:00Z"),
+        zoned("2025-01-01T00:00:00Z[UTC]"),
+        false,
+      ),
+    ).toBe(false);
+  });
+
   it("hides the prompt when the install date is in the future", () => {
     expect(
       shouldShowRateApp(
