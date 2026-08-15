@@ -1,6 +1,11 @@
 import { Temporal } from "temporal-polyfill";
 import { createEffect, createRoot, createSignal } from "solid-js";
 import { getLocalValue, setLocalValue } from "./browser";
+import {
+  parseInstant,
+  resolveInstallDate,
+  shouldShowRateApp,
+} from "../rate-app";
 
 const cloudStorage = window?.chrome?.storage ? import("./extension") : null;
 
@@ -54,61 +59,58 @@ if (cloudStorage) {
   });
 }
 
-let INSTALL_DATE = (() => {
-  const date = localStorage.getItem("install_date");
-  if (date) {
-    return Temporal.Instant.from(date);
+const INSTALL_DATE_KEY = "install_date";
+const APP_REVIEWED_KEY = "app_reviewed";
+
+const storedInstallDate = parseInstant(localStorage.getItem(INSTALL_DATE_KEY));
+
+const [getInstallDate, setInstallDate] = createSignal(
+  storedInstallDate ?? Temporal.Now.instant(),
+);
+
+if (storedInstallDate === null) {
+  localStorage.setItem(INSTALL_DATE_KEY, getInstallDate().toString());
+}
+
+window?.chrome?.storage?.sync?.get([INSTALL_DATE_KEY], (result) => {
+  const { installDate, updateLocal, updateCloud } = resolveInstallDate(
+    getInstallDate(),
+    parseInstant(result[INSTALL_DATE_KEY]),
+    Temporal.Now.instant(),
+  );
+  if (updateLocal) {
+    setInstallDate(installDate);
+    localStorage.setItem(INSTALL_DATE_KEY, installDate.toString());
   }
-  const now = Temporal.Now.instant();
-  window?.chrome?.storage?.sync?.set({
-    install_date: now.toString(),
-  });
-  localStorage.setItem("install_date", now.toString());
-  return now;
-})();
-
-window.chrome?.storage?.sync?.get(["install_date"], (result) => {
-  const date = result.install_date;
-  if (date) {
-    INSTALL_DATE = Temporal.Instant.from(date);
-  } else {
-    window.chrome?.storage?.sync?.set({
-      install_date: INSTALL_DATE.toString(),
-    });
-  }
-});
-
-let APP_REVIEWED = (() => {
-  const appReviewed = localStorage.getItem("app_reviewed");
-  return appReviewed === "true";
-})();
-
-window?.chrome?.storage?.sync?.get(["app_reviewed"], (result) => {
-  const cloudAppReviewed = result.app_reviewed;
-  if (cloudAppReviewed && !APP_REVIEWED) {
-    APP_REVIEWED = true;
-    localStorage.setItem("app_reviewed", "true");
-  } else if (!cloudAppReviewed && APP_REVIEWED) {
+  if (updateCloud) {
     window?.chrome?.storage?.sync?.set({
-      app_reviewed: true,
+      [INSTALL_DATE_KEY]: installDate.toString(),
     });
   }
 });
 
-export const showRateApp = () => {
-  if (APP_REVIEWED) {
-    return false;
+const [getAppReviewed, setAppReviewedSignal] = createSignal(
+  localStorage.getItem(APP_REVIEWED_KEY) === "true",
+);
+
+window?.chrome?.storage?.sync?.get([APP_REVIEWED_KEY], (result) => {
+  if (result[APP_REVIEWED_KEY] === true) {
+    setAppReviewedSignal(true);
+    localStorage.setItem(APP_REVIEWED_KEY, "true");
+  } else if (getAppReviewed()) {
+    window?.chrome?.storage?.sync?.set({ [APP_REVIEWED_KEY]: true });
   }
-  const installDate: Temporal.Instant = INSTALL_DATE;
-  const now = Temporal.Now.instant();
-  const diff = now.since(installDate);
-  return diff.months >= 3;
-};
+});
+
+export const showRateApp = () =>
+  shouldShowRateApp(
+    getInstallDate(),
+    Temporal.Now.zonedDateTimeISO(),
+    getAppReviewed(),
+  );
 
 export const setAppReviewed = () => {
-  APP_REVIEWED = true;
-  localStorage.setItem("app_reviewed", "true");
-  window?.chrome?.storage?.sync?.set({
-    app_reviewed: true,
-  });
+  setAppReviewedSignal(true);
+  localStorage.setItem(APP_REVIEWED_KEY, "true");
+  window?.chrome?.storage?.sync?.set({ [APP_REVIEWED_KEY]: true });
 };

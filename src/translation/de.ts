@@ -11,3 +11,4 @@ export const AGE_COPY_FAILED =
   "Alter konnte nicht in die Zwischenablage kopiert werden!";
 export const ENTER_BIRTHDAY = "Geben Sie Ihren Geburtstag ein";
 export const MOTIVATE = "Motivieren";
+export const RATE_APP = "Bewerte diese Erweiterung (zum Ausblenden klicken)";

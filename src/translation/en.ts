@@ -9,3 +9,4 @@ export const AGE_COPIED = "Age copied to clipboard!";
 export const AGE_COPY_FAILED = "Failed to copy age to clipboard!";
 export const ENTER_BIRTHDAY = "Enter your Birthday";
 export const MOTIVATE = "Motivate";
+export const RATE_APP = "Rate this extension (click to hide)";

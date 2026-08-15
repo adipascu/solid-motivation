@@ -9,3 +9,4 @@ export const AGE_COPIED = "הגיל הועתק ללוח הגזירים.";
 export const AGE_COPY_FAILED = "נכשלה העתקת הגיל ללוח הגזירים.";
 export const ENTER_BIRTHDAY = "נא למלא את יום ההולדת שלך";
 export const MOTIVATE = "יאללה מוטיבציה";
+export const RATE_APP = "דרגו את התוסף הזה (לחצו כדי להסתיר)";

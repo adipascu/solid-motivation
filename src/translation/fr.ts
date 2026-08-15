@@ -10,3 +10,4 @@ export const AGE_COPY_FAILED =
   "Échec de la copie de l'âge dans le presse-papiers !";
 export const ENTER_BIRTHDAY = "Entrez votre date de naissance";
 export const MOTIVATE = "Motiver";
+export const RATE_APP = "Évaluez cette extension (cliquez pour masquer)";
