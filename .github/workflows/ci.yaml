@@ -30,12 +30,12 @@ jobs:
           '.version = $version | .version_name = $version_name' \
           dist/manifest.json > tmp_manifest.json && \
           mv tmp_manifest.json dist/manifest.json
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: dist
           path: ./dist
       - name: Upload build artifact
-        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: ./dist
   test:
@@ -58,16 +58,18 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
   deploy-chrome-store:
-    if: github.ref == 'refs/heads/main'
+    # Disabled until the store credentials are fixed, see
+    # https://github.com/adipascu/solid-motivation/issues/30
+    if: false
     needs: [lint, build, test]
     environment:
       name: chrome-store
       url: https://chrome.google.com/webstore/detail/motivation/${{ vars.CHROME_EXTENSION_ID }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           name: dist
           path: ./dist
@@ -88,7 +90,7 @@ jobs:
       url: https://addons.mozilla.org/en-US/firefox/addon/${{ vars.FIREFOX_EXTENSION_ID }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           name: dist
           path: ./dist
