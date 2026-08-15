@@ -1,22 +1,12 @@
 import { Temporal } from "temporal-polyfill";
 import { createEffect, createRoot, createSignal } from "solid-js";
 import { getLocalValue, setLocalValue } from "./browser";
-import {
-  parseInstant,
-  resolveInstallDate,
-  shouldShowRateApp,
-} from "../rate-app";
+import { resolveInstallDate, shouldShowRateApp } from "../rate-app";
+import { parseInstant, parsePlainDate } from "../parse-temporal";
 
 const cloudStorage = window?.chrome?.storage ? import("./extension") : null;
 
 type BirthDay = Temporal.PlainDate | null;
-
-const mapToBirthDay = (birthdayString: string | null): BirthDay => {
-  if (birthdayString === null) {
-    return null;
-  }
-  return Temporal.PlainDate.from(birthdayString);
-};
 
 const mapFromBirthDay = (birthday: BirthDay): string | null => {
   if (birthday === null) {
@@ -27,7 +17,7 @@ const mapFromBirthDay = (birthday: BirthDay): string | null => {
 
 // eslint-disable-next-line import/no-unused-modules -- workaround for https://github.com/import-js/eslint-plugin-import/pull/2038
 export const [getBirthDay, setBirthDay] = createSignal<BirthDay>(
-  mapToBirthDay(getLocalValue()),
+  parsePlainDate(getLocalValue()),
 );
 
 createRoot(() => {
@@ -53,7 +43,7 @@ if (cloudStorage) {
     getValue((birthdayString) => {
       const currentBirthDayString = mapFromBirthDay(getBirthDay());
       if (birthdayString !== currentBirthDayString) {
-        setBirthDay(mapToBirthDay(birthdayString));
+        setBirthDay(parsePlainDate(birthdayString));
       }
     });
   });

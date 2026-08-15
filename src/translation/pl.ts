@@ -10,3 +10,4 @@ export const AGE_COPY_FAILED = "Nie udało się skopiować wieku do schowka!";
 export const ENTER_BIRTHDAY = "Wprowadź swoją datę urodzenia";
 export const MOTIVATE = "Motywuj";
 export const RATE_APP = "Oceń to rozszerzenie (kliknij, aby ukryć)";
+export const SETTINGS_LABEL = "Zmień datę urodzenia";

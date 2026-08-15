@@ -12,3 +12,4 @@ export const AGE_COPY_FAILED =
 export const ENTER_BIRTHDAY = "Digite sua data de nascimento";
 export const MOTIVATE = "Motivar";
 export const RATE_APP = "Avalie esta extensão (clique para ocultar)";
+export const SETTINGS_LABEL = "Alterar a sua data de nascimento";

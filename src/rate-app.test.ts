@@ -1,37 +1,12 @@
 import { Temporal } from "temporal-polyfill";
 import {
   earlierInstant,
-  parseInstant,
   resolveInstallDate,
   shouldShowRateApp,
 } from "./rate-app";
 
 const instant = (value: string) => Temporal.Instant.from(value);
 const zoned = (value: string) => Temporal.ZonedDateTime.from(value);
-
-describe("parseInstant", () => {
-  it("parses a stored instant string", () => {
-    expect(parseInstant("2025-01-01T00:00:00Z")).toEqual(
-      instant("2025-01-01T00:00:00Z"),
-    );
-  });
-
-  it("returns null for a missing value", () => {
-    expect(parseInstant(null)).toBeNull();
-    expect(parseInstant(undefined)).toBeNull();
-  });
-
-  it("returns null for a non-string value", () => {
-    expect(parseInstant(1735689600000)).toBeNull();
-    expect(parseInstant(true)).toBeNull();
-  });
-
-  it("returns null for a corrupted value instead of throwing", () => {
-    expect(parseInstant("not a date")).toBeNull();
-    expect(parseInstant("")).toBeNull();
-    expect(parseInstant("2025-13-45T99:99:99Z")).toBeNull();
-  });
-});
 
 describe("earlierInstant", () => {
   it("keeps the known instant when the other is missing", () => {

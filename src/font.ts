@@ -1,4 +1,4 @@
 import "@fontsource/sen";
 
-const FONT_FAMILY = "Avenir, Sen , sans-serif";
+const FONT_FAMILY = "Sen, Avenir, sans-serif";
 export default FONT_FAMILY;

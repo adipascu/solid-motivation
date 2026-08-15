@@ -10,3 +10,4 @@ export const AGE_COPY_FAILED = "Kunde inte kopiera åldern till urklipp!";
 export const ENTER_BIRTHDAY = "Ange din födelsedag";
 export const MOTIVATE = "Motivera";
 export const RATE_APP = "Betygsätt det här tillägget (klicka för att dölja)";
+export const SETTINGS_LABEL = "Ändra din födelsedag";

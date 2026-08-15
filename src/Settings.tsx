@@ -3,6 +3,9 @@ import { Temporal } from "temporal-polyfill";
 import FONT_FAMILY from "./font";
 import { colorBackground, colorPrimary, colorSecondary } from "./colors";
 import { ENTER_BIRTHDAY, MOTIVATE } from "./translation";
+import { parsePlainDate } from "./parse-temporal";
+
+const BIRTH_DAY_INPUT_ID = "birthday";
 
 export default ({
   onBirthDay,
@@ -10,6 +13,7 @@ export default ({
   onBirthDay: (birthDay: Temporal.PlainDate | null) => void;
 }) => {
   const [date, setDate] = createSignal<Temporal.PlainDate | null>(null);
+  const [isHovered, setIsHovered] = createSignal(false);
 
   return (
     <div
@@ -21,6 +25,7 @@ export default ({
       }}
     >
       <label
+        for={BIRTH_DAY_INPUT_ID}
         style={{
           "font-family": FONT_FAMILY,
           "font-size": "19.2px",
@@ -33,6 +38,7 @@ export default ({
       </label>
       <input
         autofocus
+        id={BIRTH_DAY_INPUT_ID}
         type="date"
         style={{
           "margin-bottom": "10px",
@@ -51,7 +57,7 @@ export default ({
           }
         }}
         onInput={(e) => {
-          setDate(Temporal.PlainDate.from(e.currentTarget.value));
+          setDate(parsePlainDate(e.currentTarget.value));
         }}
       />
       <button
@@ -72,14 +78,11 @@ export default ({
           "background-color": colorPrimary(),
           color: colorBackground(),
           cursor: "pointer",
-          transition: "background-color 0.2s ease",
+          opacity: isHovered() ? 0.85 : 1,
+          transition: "opacity 0.2s ease",
         }}
-        onMouseOver={(e) => {
-          e.currentTarget.style.backgroundColor = colorPrimary();
-        }}
-        onMouseOut={(e) => {
-          e.currentTarget.style.backgroundColor = colorSecondary();
-        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
         {MOTIVATE}
       </button>

@@ -2,17 +2,6 @@ import { Temporal } from "temporal-polyfill";
 
 const RATE_APP_MIN_MONTHS = 3;
 
-export const parseInstant = (value: unknown) => {
-  if (typeof value !== "string") {
-    return null;
-  }
-  try {
-    return Temporal.Instant.from(value);
-  } catch {
-    return null;
-  }
-};
-
 export const earlierInstant = (
   instant: Temporal.Instant,
   other: Temporal.Instant | null,

@@ -12,3 +12,4 @@ export const AGE_COPY_FAILED =
 export const ENTER_BIRTHDAY = "Geben Sie Ihren Geburtstag ein";
 export const MOTIVATE = "Motivieren";
 export const RATE_APP = "Bewerte diese Erweiterung (zum Ausblenden klicken)";
+export const SETTINGS_LABEL = "Geburtstag ändern";
