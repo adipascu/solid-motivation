@@ -1,7 +1,7 @@
 {
-  "packageManager": "pnpm@10.10.0",
+  "packageManager": "pnpm@11.20.0",
   "engines": {
-    "node": "^22.8.0"
+    "node": "^22.13.0"
   },
   "scripts": {
     "start": "vite",
