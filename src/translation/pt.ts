@@ -11,3 +11,4 @@ export const AGE_COPY_FAILED =
   "Falha ao copiar idade para a área de transferência!";
 export const ENTER_BIRTHDAY = "Digite sua data de nascimento";
 export const MOTIVATE = "Motivar";
+export const RATE_APP = "Avalie esta extensão (clique para ocultar)";

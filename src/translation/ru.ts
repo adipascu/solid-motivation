@@ -9,3 +9,4 @@ export const AGE_COPIED = "Возраст скопирован в буфер о�
 export const AGE_COPY_FAILED = "Не удалось скопировать возраст в буфер обмена!";
 export const ENTER_BIRTHDAY = "Введите свой день рождения";
 export const MOTIVATE = "Мотивировать";
+export const RATE_APP = "Оцените это расширение (нажмите, чтобы скрыть)";

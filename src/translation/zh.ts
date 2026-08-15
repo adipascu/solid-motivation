@@ -9,3 +9,4 @@ export const AGE_COPIED = "年龄已复制到剪贴板！";
 export const AGE_COPY_FAILED = "无法将年龄复制到剪贴板！";
 export const ENTER_BIRTHDAY = "请输入您的生日";
 export const MOTIVATE = "激励";
+export const RATE_APP = "为此扩展程序评分（点击隐藏）";

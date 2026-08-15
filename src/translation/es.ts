@@ -9,3 +9,4 @@ export const AGE_COPIED = "¡Edad copiada al portapapeles!";
 export const AGE_COPY_FAILED = "No se pudo copiar la edad al portapapeles.";
 export const ENTER_BIRTHDAY = "Introduce tu fecha de nacimiento";
 export const MOTIVATE = "Motivar";
+export const RATE_APP = "Valora esta extensión (haz clic para ocultar)";

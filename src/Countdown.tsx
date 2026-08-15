@@ -1,4 +1,4 @@
-import { createSignal, onCleanup } from "solid-js";
+import { createSignal, onCleanup, Show } from "solid-js";
 import { Temporal } from "temporal-polyfill";
 import { IoSettingsSharp } from "solid-icons/io";
 import toast, { Toaster } from "solid-toast";
@@ -13,9 +13,10 @@ import {
   BIRTH_DAY_FORMAT,
   AGE_COPIED,
   AGE_COPY_FAILED,
-  REVIEW_URL,
+  RATE_APP,
 } from "./translation";
 import { setAppReviewed, showRateApp } from "./storage";
+import { getReviewUrl } from "./review-url";
 
 const animationLoop = (cb: (time: DOMHighResTimeStamp) => void) => {
   let handle: number;
@@ -54,7 +55,7 @@ export default ({
       toast.error(AGE_COPY_FAILED);
     }
   };
-  const showRateUs = showRateApp();
+  const reviewUrl = getReviewUrl();
   return (
     <div
       style={{
@@ -139,20 +140,24 @@ export default ({
             >
               .{smallAge()}
             </div>
-            {showRateUs && REVIEW_URL && (
-              <a
-                style={{
-                  "font-size": "11.5px",
-                  "margin-bottom": "6px",
-                  "font-family": FONT_FAMILY,
-                  "margin-left": "7px",
-                  color: colorSecondary(),
-                }}
-                onClick={setAppReviewed}
-                href={REVIEW_URL}
-              >
-                Rate us on the Chrome Web Store! (click to hide)
-              </a>
+            {reviewUrl !== null && (
+              <Show when={showRateApp()}>
+                <a
+                  style={{
+                    "font-size": "11.5px",
+                    "margin-bottom": "6px",
+                    "font-family": FONT_FAMILY,
+                    "margin-left": "7px",
+                    color: colorPrimary(),
+                  }}
+                  onClick={setAppReviewed}
+                  href={reviewUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {RATE_APP}
+                </a>
+              </Show>
             )}
             <a
               href="https://github.com/adipascu/solid-motivation"

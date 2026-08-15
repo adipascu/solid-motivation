@@ -1,4 +1,3 @@
-import Bowser from "bowser";
 import assertUnreachable from "../assertUnreachable";
 
 const SUPPORTED_LANGUAGES = [
@@ -87,23 +86,5 @@ export const {
   AGE_COPY_FAILED,
   ENTER_BIRTHDAY,
   MOTIVATE,
+  RATE_APP,
 } = data;
-
-const CHROME_STORE_URL =
-  "https://chromewebstore.google.com/detail/ebnfiihobaicohplfgeenddclnjblfkc";
-const FIREFOX_STORE_URL =
-  "https://addons.mozilla.org/en-US/firefox/addon/solid-motivation/";
-
-export const REVIEW_URL = (() => {
-  const browser = Bowser.getParser(window.navigator.userAgent);
-  const browserName = browser.getBrowserName();
-
-  switch (browserName) {
-    case "Chrome":
-      return CHROME_STORE_URL;
-    case "Firefox":
-      return FIREFOX_STORE_URL;
-    default:
-      return null;
-  }
-})();
