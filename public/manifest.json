@@ -2,6 +2,7 @@
   "manifest_version": 3,
   "name": "Solid Motivation",
   "version": "1.0.0",
+  "description": "Turns every new tab into a live counter of your age, down to the fraction of a second.",
   "permissions": [
     "storage"
   ],
