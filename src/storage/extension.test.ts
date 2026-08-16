@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
+import { Effect } from "effect";
 import { stubChrome } from "../test-helpers/chrome";
 
 const loadExtensionStorage = async (initialSync: Record<string, unknown>) => {
@@ -65,7 +66,9 @@ describe("getValue", () => {
 describe("setValue", () => {
   it("syncs the birthday to the account", async () => {
     const { chrome, setValue } = await loadExtensionStorage({});
-    await expect(setValue("1990-05-04")).resolves.toBeUndefined();
+    await expect(
+      Effect.runPromise(setValue("1990-05-04")),
+    ).resolves.toBeUndefined();
     expect(chrome.sync).toEqual({ birthday: "1990-05-04" });
   });
 
@@ -73,14 +76,14 @@ describe("setValue", () => {
     const { chrome, setValue } = await loadExtensionStorage({
       birthday: "1990-05-04",
     });
-    await expect(setValue(null)).resolves.toBeUndefined();
+    await expect(Effect.runPromise(setValue(null))).resolves.toBeUndefined();
     expect(chrome.sync).toEqual({});
   });
 
   it("rejects when the account refuses the write", async () => {
     const { chrome, setValue } = await loadExtensionStorage({});
     chrome.failWrites("QUOTA_BYTES_PER_ITEM quota exceeded");
-    await expect(setValue("1990-05-04")).rejects.toThrow(
+    await expect(Effect.runPromise(setValue("1990-05-04"))).rejects.toThrow(
       "QUOTA_BYTES_PER_ITEM quota exceeded",
     );
   });
@@ -88,7 +91,7 @@ describe("setValue", () => {
   it("still names the failure when the account gives no reason", async () => {
     const { chrome, setValue } = await loadExtensionStorage({});
     chrome.failWrites();
-    await expect(setValue("1990-05-04")).rejects.toThrow(
+    await expect(Effect.runPromise(setValue("1990-05-04"))).rejects.toThrow(
       "chrome.storage.sync refused",
     );
   });
@@ -98,7 +101,7 @@ describe("setValue", () => {
       birthday: "1990-05-04",
     });
     chrome.failWrites("MAX_WRITE_OPERATIONS_PER_MINUTE quota exceeded");
-    await expect(setValue(null)).rejects.toThrow(
+    await expect(Effect.runPromise(setValue(null))).rejects.toThrow(
       "MAX_WRITE_OPERATIONS_PER_MINUTE quota exceeded",
     );
   });

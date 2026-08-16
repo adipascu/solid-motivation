@@ -1,3 +1,5 @@
+import { Effect } from "effect";
+
 const BIRTHDAY_KEY = "birthday";
 
 const { chrome } = window;
@@ -24,14 +26,16 @@ export const getValue = (obs: (value: string | null) => void) => {
 };
 
 export const setValue = (birthday: string | null) =>
-  new Promise<void>((resolve, reject) => {
+  Effect.async<void, Error>((resume) => {
     const settle = () => {
       const failure = chrome.runtime.lastError;
-      if (failure) {
-        reject(new Error(failure.message ?? "chrome.storage.sync refused"));
-      } else {
-        resolve();
-      }
+      resume(
+        failure
+          ? Effect.fail(
+              new Error(failure.message ?? "chrome.storage.sync refused"),
+            )
+          : Effect.void,
+      );
     };
     if (birthday === null) {
       chrome.storage.sync.remove(BIRTHDAY_KEY, settle);

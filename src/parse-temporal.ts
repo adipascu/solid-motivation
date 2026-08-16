@@ -1,23 +1,15 @@
 import { Temporal } from "temporal-polyfill";
+import { Effect } from "effect";
 
-export const parseInstant = (value: unknown) => {
-  if (typeof value !== "string") {
-    return null;
-  }
-  try {
-    return Temporal.Instant.from(value);
-  } catch {
-    return null;
-  }
-};
+const parseOrNull = <A>(parse: () => A) =>
+  Effect.runSync(Effect.try(parse).pipe(Effect.orElseSucceed(() => null)));
 
-export const parsePlainDate = (value: unknown) => {
-  if (typeof value !== "string") {
-    return null;
-  }
-  try {
-    return Temporal.PlainDate.from(value);
-  } catch {
-    return null;
-  }
-};
+export const parseInstant = (value: unknown) =>
+  typeof value === "string"
+    ? parseOrNull(() => Temporal.Instant.from(value))
+    : null;
+
+export const parsePlainDate = (value: unknown) =>
+  typeof value === "string"
+    ? parseOrNull(() => Temporal.PlainDate.from(value))
+    : null;
