@@ -2,3 +2,6 @@ allowBuilds:
   # Only used by eslint-plugin-import-x's module resolver, which no enabled
   # rule reaches.
   unrs-resolver: false
+  # Optional native msgpack accelerator pulled in by @effect/platform. The JS
+  # fallback is what runs in the browser bundle anyway.
+  msgpackr-extract: false

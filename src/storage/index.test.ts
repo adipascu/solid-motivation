@@ -110,6 +110,22 @@ describe("with the extension storage APIs", () => {
     });
   });
 
+  it("reports a refused cloud write instead of dropping it", async () => {
+    const reported = vi
+      .spyOn(globalThis.console, "log")
+      .mockImplementation(() => {});
+    const chrome = stubChrome();
+    const { setBirthDay } = await loadStorage(chrome);
+    chrome.failWrites("QUOTA_BYTES_PER_ITEM quota exceeded");
+    setBirthDay(Temporal.PlainDate.from(BIRTH_DAY));
+    await vi.waitFor(() => {
+      expect(reported).toHaveBeenCalled();
+    });
+    expect(JSON.stringify(reported.mock.calls)).toContain(
+      "QUOTA_BYTES_PER_ITEM quota exceeded",
+    );
+  });
+
   it("removes the birthday from the account when it is reset", async () => {
     localStorage.setItem(BIRTHDAY_KEY, BIRTH_DAY);
     const chrome = stubChrome({ [BIRTHDAY_KEY]: BIRTH_DAY });

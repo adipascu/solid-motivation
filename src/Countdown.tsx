@@ -1,5 +1,6 @@
 import { createSignal, onCleanup, Show } from "solid-js";
 import { Temporal } from "temporal-polyfill";
+import { Effect } from "effect";
 import { IoSettingsSharp } from "solid-icons/io";
 import toast, { Toaster } from "solid-toast";
 import FONT_FAMILY from "./font";
@@ -48,17 +49,17 @@ export default ({
   const largeAge = () => Math.floor(age()).toString();
   const smallAge = () => age().toFixed(11).split(".")[1];
 
-  const copyAgeToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(`${largeAge()}.${smallAge()}`);
-      toast.success(AGE_COPIED);
-    } catch {
-      toast.error(AGE_COPY_FAILED);
-    }
-  };
-
   const onCopyAge = () => {
-    void copyAgeToClipboard();
+    Effect.runFork(
+      Effect.tryPromise(() =>
+        navigator.clipboard.writeText(`${largeAge()}.${smallAge()}`),
+      ).pipe(
+        Effect.match({
+          onSuccess: () => toast.success(AGE_COPIED),
+          onFailure: () => toast.error(AGE_COPY_FAILED),
+        }),
+      ),
+    );
   };
   const reviewUrl = getReviewUrl();
   return (
