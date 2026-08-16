@@ -68,7 +68,7 @@ pnpm install
 
 Every line, statement, branch and function in `src/` has to be covered for `pnpm test` to pass, so a new module arrives with its tests. Code that genuinely cannot be reached, such as the exhaustiveness guard in `src/translation/index.ts`, is marked with a `/* v8 ignore */` pragma rather than lowering the threshold.
 
-A `husky` pre-commit hook formats and lints the staged files through `lint-staged`, then runs the lint, format, typecheck, test and knip suites over the whole repository. Only `pnpm build` is left to CI.
+A `husky` pre-commit hook formats and lints the staged files through `lint-staged`, then runs the lint, format, typecheck, build, test and knip suites over the whole repository, so a commit runs everything CI runs. `pnpm typecheck` is the only thing that type checks: `vite-plugin-checker` reports type errors in the dev server but stays out of `pnpm build`, which would otherwise repeat the same `tsc` run.
 
 Age arithmetic lives in [`src/calculate-age.ts`](src/calculate-age.ts). It uses [`temporal-polyfill`](https://github.com/fullcalendar/temporal-polyfill) so that time zones, DST and leap years are the library's problem rather than ours.
 
