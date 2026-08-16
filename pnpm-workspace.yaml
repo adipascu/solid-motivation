@@ -1,5 +1,4 @@
 allowBuilds:
-  esbuild: false
   # Only used by eslint-plugin-import-x's module resolver, which no enabled
   # rule reaches.
   unrs-resolver: false
