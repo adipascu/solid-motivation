@@ -11,6 +11,7 @@ export default {
   plugins: [
     checkerPlugin({
       typescript: true,
+      enableBuild: false,
     }),
     solidDevtoolsPlugin(),
     solidPlugin(),
