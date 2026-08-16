@@ -70,6 +70,10 @@ Every line, statement, branch and function in `src/` has to be covered for `pnpm
 
 A `husky` pre-commit hook formats and lints the staged files through `lint-staged`, then runs the lint, format, typecheck, build, test and knip suites over the whole repository, so a commit runs everything CI runs. `pnpm typecheck` is the only thing that type checks: `vite-plugin-checker` reports type errors in the dev server but stays out of `pnpm build`, which would otherwise repeat the same `tsc` run.
 
+`src/` is held to a platform and async discipline: no `Date`, no `localStorage` or other raw platform global, whether bare or reached through `window`, and no `throw`, `try`, bare `Promise` or `async` function. Failures belong in a typed error channel and platform access behind a service, which is what [Effect](https://effect.website/) is for. Tests and `src/test-helpers/` are exempt.
+
+Twenty-three of the thirty files under `src/` already meet that bar. The eighteen violations in the remaining seven are recorded in `eslint-suppressions.json` so `pnpm lint` passes, and `effect` is not a dependency yet, so the rule messages describe where the code is going rather than what it can do today. That file is a ledger to pay down rather than somewhere to add to. ESLint fails the run when a suppression no longer matches a real violation, so clearing one forces `pnpm exec eslint --prune-suppressions`, and an extra violation in an already-suppressed file fails the run outright.
+
 Age arithmetic lives in [`src/calculate-age.ts`](src/calculate-age.ts). It uses [`temporal-polyfill`](https://github.com/fullcalendar/temporal-polyfill) so that time zones, DST and leap years are the library's problem rather than ours.
 
 ## Loading it unpacked
